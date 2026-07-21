@@ -1,4 +1,4 @@
-# GeolocalizacionSalud (PaginaSalud IESS)
+# PaginaSaludApi (PaginaSalud IESS)
 
 Aplicación Angular para la página de salud del IESS, con mapa de unidades médicas y geolocalización (Leaflet).
 
