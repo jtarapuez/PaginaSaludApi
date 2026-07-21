@@ -4,6 +4,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { BannerComponent } from './components/banner/banner.component';
 import { TutorialesVideoComponent } from './components/tutoriales-video/tutoriales-video.component';
 import { CoberturaSeguroComponent } from './components/cobertura-seguro/cobertura-seguro.component';
+import { UnidadesMedicasComponent } from './components/unidades-medicas/unidades-medicas.component';
 import { MapaUbicacionesComponent } from './components/mapa-ubicaciones/mapa-ubicaciones.component';
 
 @Component({
@@ -14,6 +15,7 @@ import { MapaUbicacionesComponent } from './components/mapa-ubicaciones/mapa-ubi
     BannerComponent,
     TutorialesVideoComponent,
     CoberturaSeguroComponent,
+    UnidadesMedicasComponent,
     MapaUbicacionesComponent
   ],
   templateUrl: './app.component.html',
@@ -29,6 +31,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.observeElements();
+    // Re-escanea tras el render completo de componentes hijos
+    setTimeout(() => this.observeElements(), 0);
   }
 
   ngOnDestroy() {
@@ -53,8 +57,16 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private observeElements() {
-    // Observar elementos que deben tener efecto fade
-    const elementsToObserve = document.querySelectorAll('.fade-in-scroll, .fade-in-left, .fade-in-right, .fade-in-up, .fade-in-scale');
-    elementsToObserve.forEach(el => this.observer.observe(el));
+    const elementsToObserve = document.querySelectorAll(
+      '.fade-in-scroll, .fade-in-left, .fade-in-right, .fade-in-up, .fade-in-scale'
+    );
+    elementsToObserve.forEach(el => {
+      const element = el as HTMLElement;
+      if (element.dataset['fadeObserved'] === 'true') {
+        return;
+      }
+      element.dataset['fadeObserved'] = 'true';
+      this.observer.observe(el);
+    });
   }
 }

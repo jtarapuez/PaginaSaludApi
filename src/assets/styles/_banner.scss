@@ -4,12 +4,9 @@ $banner-primary: #1b3c6f;
 $banner-text: #3f3e3e;
 $banner-bg: #f4f4f4;
 
-.banner-spacer {
-  height: 120px;
-}
-
 .banner-section {
   background-color: $banner-bg;
+  margin-top: 0;
 }
 
 .banner-container {
@@ -127,12 +124,34 @@ $banner-bg: #f4f4f4;
   top: 22%;
   left: 0;
   transform: translate(-50%, -50%);
+
+  &.banner-circle-reveal.fade-in-scale {
+    transform: translate(-50%, -50%) scale(0.35);
+    transition-delay: 0.1s;
+  }
+
+  &.banner-circle-reveal.fade-in-scale.fade-in-visible {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.banner-image-reveal.fade-in-scale {
+  transition-delay: 0.45s;
 }
 
 .banner-circle--right {
   top: 22%;
   right: 0;
   transform: translate(50%, -50%);
+
+  &.banner-circle-reveal.fade-in-scale {
+    transform: translate(50%, -50%) scale(0.35);
+    transition-delay: 0.85s;
+  }
+
+  &.banner-circle-reveal.fade-in-scale.fade-in-visible {
+    transform: translate(50%, -50%) scale(1);
+  }
 }
 
 @media (max-width: vars.$desktop-sm) {
@@ -171,10 +190,6 @@ $banner-bg: #f4f4f4;
 }
 
 @media (max-width: vars.$mobile) {
-  .banner-spacer {
-    height: 100px;
-  }
-
   .banner-title {
     margin-bottom: 20px;
   }

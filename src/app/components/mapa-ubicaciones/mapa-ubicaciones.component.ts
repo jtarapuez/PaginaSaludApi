@@ -69,7 +69,7 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
   // Destino pendiente si el usuario pidió ruta antes de tener ubicación
   private destinoPendiente: { lat: number; lng: number } | null = null;
 
-  // Capa de ruta en el mapa
+  private mapRevealObserver?: IntersectionObserver;
   private rutaLayer: L.Polyline | null = null;
   private mapClickUbicacionHandler?: (event: L.LeafletMouseEvent) => void;
   
@@ -164,10 +164,24 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
   }
   
   ngAfterViewInit(): void {
-    console.log('NgAfterViewInit ejecutado');
+    const content = document.querySelector('.mapa-content-reveal');
+    if (!content) {
+      return;
+    }
+
+    this.mapRevealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && this.map) {
+          setTimeout(() => this.map?.invalidateSize(), 900);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    this.mapRevealObserver.observe(content);
   }
 
   ngOnDestroy(): void {
+    this.mapRevealObserver?.disconnect();
     if (this.busquedaTimeout) {
       clearTimeout(this.busquedaTimeout);
     }

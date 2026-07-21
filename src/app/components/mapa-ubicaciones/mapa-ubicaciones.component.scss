@@ -6,38 +6,14 @@
   padding: 20px 0;
   margin: 0;
   width: 100%;
+
+  .mapa-content-reveal.fade-in-up {
+    transition-delay: 0.15s;
+  }
   
   @media (max-width: 768px) {
     padding: 10px 0;
     margin: 0;
-  }
-}
-
-/* Título del mapa - similar a tituloPF */
-#titulo-mapa {
-  background-color: #204f79;
-  padding: 15px 0;
-  margin-bottom: 20px;
-  
-  .tituloPF {
-    color: #fff;
-    font-family: 'PoppinsSB';
-    font-size: 2.0rem;
-    letter-spacing: -1px;
-  }
-  
-  @media (max-width: 768px) {
-    padding: 10px 0;
-    margin-bottom: 15px;
-    
-    .tituloPF {
-      font-size: 1.5rem;
-      text-align: center;
-    }
-    
-    .cel2 {
-      justify-content: center !important;
-    }
   }
 }
 

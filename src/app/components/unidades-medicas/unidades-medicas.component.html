@@ -1,0 +1,36 @@
+<section id="unidadesMedicas" class="unidades-medicas-section">
+  <div class="unidades-medicas-inner custom-container-interno fade-in-up">
+    <div class="unidades-medicas-icon-wrap">
+      <img
+        src="assets/images/ico_Unidades_Medicas.png"
+        alt="Unidades médicas del IESS"
+        class="unidades-medicas-icon"
+        width="200"
+        height="200"
+        loading="lazy"
+      >
+    </div>
+
+    <div class="unidades-medicas-body">
+      <div class="unidades-medicas-message">
+        <p class="unidades-medicas-lead">El IESS cuenta con</p>
+        <p class="unidades-medicas-total">
+          <span class="unidades-medicas-total-number">{{ totalUnidades }}</span>
+          <span class="unidades-medicas-total-label">unidades</span>
+        </p>
+        <p class="unidades-medicas-lead">médicas a escala nacional</p>
+      </div>
+
+      <div class="unidades-medicas-separator" aria-hidden="true"></div>
+
+      <ul class="unidades-medicas-stats">
+        @for (item of niveles; track item.nivel) {
+          <li class="unidades-medicas-stat">
+            <span class="unidades-medicas-stat-label">{{ item.nivel }}:</span>
+            <span class="unidades-medicas-stat-value">{{ item.cantidad }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>
