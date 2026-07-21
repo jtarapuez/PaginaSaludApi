@@ -1,0 +1,47 @@
+---
+description: Convenciones y contexto del proyecto PaginaSalud IESS para agentes de Cursor
+alwaysApply: true
+---
+
+# PaginaSalud — reglas para agentes
+
+## Proyecto
+
+Angular 19 standalone, landing IESS. Repo: `jtarapuez/GeolocalizacionSalud`. Rama `main`.
+
+## Antes de cambiar código
+
+- Leer `AGENTS.md` y `docs/ARQUITECTURA.md` si el cambio es estructural.
+- Para el mapa: leer `docs/MAPA-UBICACIONES.md` antes de modificar `mapa-ubicaciones/`.
+- Replicar patrones existentes: standalone, secciones en `components/`, estilos en `src/assets/styles/_*.scss`.
+- Cambios mínimos; no refactorizar sin pedirlo.
+
+## Convenciones de código
+
+- Nuevas secciones: carpeta en `src/app/components/`, registrar en `app.component.ts` y `.html`.
+- Cada enlace del navbar debe tener `id` correspondiente en el HTML.
+- Datos del mapa: `UnidadesMedicasService` + `src/assets/data/unidades-medicas.json`.
+- Assets canónicos: `src/assets/` (no usar `/assets/` en raíz).
+- Idioma UI: español. Preferir `lang="es"` en HTML.
+
+## Prohibido sin autorización explícita
+
+- `git commit`, `git push`, modificar `git config`
+- Force push a `main`
+- Commitear `.env` o credenciales
+- Refactors masivos (Bootstrap, SSR, environments) mezclados con features
+
+## Deuda técnica — no empeorar
+
+- `environment` no está cableado; al tocar URLs usar `environment` y cablearlo.
+- No duplicar Bootstrap (ya hay CDN + SCSS).
+- No añadir más carga global de Leaflet sin necesidad.
+- `app.component.scss` no existe; no referenciar archivos inexistentes.
+
+## Git
+
+Usar skill `.cursor/skills/git-geolocalizacion-salud/` cuando el usuario pida subir cambios.
+
+## Secciones pendientes
+
+`servicios`, modalidades de afiliación (5 anclas), `preguntasFrecuentes`. Imágenes `bot_*.png` ya en assets.

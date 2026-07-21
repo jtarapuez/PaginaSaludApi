@@ -1,0 +1,1245 @@
+@use 'variables' as vars;
+
+:root {
+    --primary-color: #F5F5F7;
+    --secondary-color: #5ea7dc;
+	
+	--tertiary-color:#204f79;
+    --text-color: #454544;
+    --light-bg: #f5f5f5;
+    --animation-duration: 1.2s;
+	--text-size:2rem;
+	
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body, html {
+  min-height: 100%;
+  font-family: 'PoppinsR', sans-serif;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+	
+ color: #6c757d;
+   
+}
+/***  CONTENEDOR GENERAL     **/
+.custom-container {
+  width: 100%;
+  /*max-width: 1920px;*/
+  margin: auto; /* Centra el contenido */
+  background-color: white; /* Asegura que el contenido esté sobre fondo blanco */
+}
+.custom-container-interno {
+  width: 65%;
+  border: 0px solid #000;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+@media (max-width: 1366px) {
+  .custom-container {
+    width: 100%; /* Para móviles, que use más espacio */
+    padding: 1rem;
+    max-width: 1366px; /* Evita que sea demasiado ancho en monitores grandes */
+  }
+  .custom-container-interno {
+    width: 90%;
+    border: 0px solid #000;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media (max-width: 1600px) {
+  .custom-container-interno {
+    width: 90%;
+    border: 0px solid #000;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+
+
+.fondoPlomo{
+	
+	
+	background: var(--primary-color) !important;
+}
+
+/*****/
+/*  ESPACIOS TITULOS CELDAS    */
+/*****/
+.cel1{
+
+width: 20%; padding-left: 10px;	
+}
+
+.cel2{
+
+width: 80%; padding-left: 10px;
+	
+}
+
+
+
+
+
+
+	
+	
+
+.espacioTop{
+	
+margin-top:200px	
+}
+
+
+.separadormenu{
+  scroll-margin-top: 150px; 
+ 
+}
+.separadormenuI {
+  scroll-margin-top: 120px;
+}
+.separadormenuSL{
+  scroll-margin-top: 150px;
+}
+.separadormenuAJ {
+  scroll-margin-top: 120px;
+}
+.separadormenuAV {
+  scroll-margin-top: 120px;
+}
+.separadormenuGC {
+  scroll-margin-top: 120px;
+}
+.separadormenuTNRH {
+  scroll-margin-top: 120px;
+}
+
+.separadormenuAE {
+  scroll-margin-top: 120px;
+}
+.separadormenuVT {
+  scroll-margin-top: 150px;
+}
+.separadormenuPF {
+  scroll-margin-top: 150px;
+}
+
+
+
+/* Estilos para la barra de navegación */
+.custom-navbar {
+  background-color: white;
+  padding: 30px 10px;
+  border-bottom: 10px solid var(--secondary-color) !important;
+
+  .navbar-nav {
+    margin-left: 100px;
+
+    .nav-link {
+      color: #3F3E3E;
+      position: relative;
+      transition: color 0.3s ease-in-out;
+      font-family: 'PoppinsR';
+      font-size: 0.9em;
+      padding-left: 50px;
+      line-height: 16px;
+      text-align: left !important;
+      align-items: center;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        width: 0;
+        height: 3px;
+        background-color: var(--secondary-color);
+        transition: width 0.3s ease-in-out;
+      }
+
+      &:hover {
+        color: var(--secondary-color);
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+/* Estilo para el botón de menú en dispositivos móviles */
+.custom-toggler {
+  border: none;
+}
+
+.navbar-toggler-icon {
+  filter: invert(0);
+}
+
+/* Estilos para el submenú */
+.nav-item.dropdown .submenu {
+  display: none; /* Ocultamos el submenú por defecto */
+  position: absolute;
+  top: 92%;
+  left: 0;
+  background: var(--primary-color) !important;
+  padding: 10px 0;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.3s ease; /* Efecto suave de deslizamiento */
+  z-index: 1000; /* Para asegurarse de que quede por encima de otros elementos */
+}
+
+.nav-item.dropdown:hover .submenu {
+  display: block;
+  opacity: 1;
+  max-height: 500px; /* Máxima altura del submenú */
+}
+
+/* Estilos para los enlaces dentro del submenú */
+.submenu .dropdown-item {
+  color: #6e757c;
+  font-size: 0.9em;
+  padding-left: 30px;
+}
+
+.submenu .dropdown-item:hover {
+  background: var(--secondary-color) !important;
+  color:#fff;
+}
+
+
+
+
+
+
+/*  Estilos banner      */
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+.custom-section {
+  background: var(--primary-color) !important;
+	
+  padding: 2rem;
+}
+
+
+.text-success {
+  color: var(--terciario-color) !important;
+  font-size: 5rem;
+  font-family: 'PoppinsB';
+}
+.text-white {
+  color: var(--secundario-color) !important;
+  font-size: 5rem;
+  font-family: 'PoppinsSB';
+}
+.text-resumen {
+  color: #454544 !important;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  line-height: 25px;	
+  font-family: 'PoppinsL';
+}
+.centar_resumen {
+  max-width: 80%;
+}
+
+@media (max-width: 768px) {
+	
+	.custom-section {
+ 
+  padding: 0rem;
+}
+	
+.espacioTop{
+	
+margin-top:180px	
+}
+	
+	
+  .separadormenu{
+  scroll-margin-top: 150px; 
+ 
+}
+.separadormenuI {
+  scroll-margin-top: 120px;
+}
+.separadormenuSL{
+  scroll-margin-top: 150px;
+}
+.separadormenuAJ {
+  scroll-margin-top: 120px;
+}
+.separadormenuAV {
+  scroll-margin-top: 120px;
+}
+.separadormenuGC {
+  scroll-margin-top: 120px;
+}
+.separadormenuTNRH {
+  scroll-margin-top: 120px;
+}
+
+.separadormenuAE {
+  scroll-margin-top: 120px;
+}
+.separadormenuVT {
+  scroll-margin-top: 150px;
+}
+.separadormenuPF {
+  scroll-margin-top: 150px;
+}
+	
+	.cel1{
+
+width: 5%; padding-left: 10px;	
+}
+
+.cel2{
+
+width: 90%; padding-left: 10px;
+	
+}
+
+	
+  .custom-navbar {
+    padding: 20px 10px;
+  }
+  .text-success {
+    font-size: 3.0rem;
+  }
+  .text-white {
+    color: var(--secundario-color) !important;
+    font-size: 3.0rem;
+    font-family: 'PoppinsSB';
+  }
+  .text-resumen {
+    font-size: 1.0rem;
+    letter-spacing: 2px;
+    line-height: 25px;
+    font-family: 'PoppinsL';
+  }
+  .centar_resumen {
+    max-width: 100%;
+  }
+}
+/*    ESTILOS REQUISITOS   */
+.fondoimg {
+  background-image: url('../images/fondo_iconos.png'); /* Ruta de tu imagen */
+  background-size: cover; /* Hace que la imagen cubra todo el espacio */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita repeticiones */
+  min-height: 300px; /* Al menos el alto de la pantalla */
+  display: flex; /* Permite ajustar el contenido */
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Centra horizontalmente */
+  padding: 20px; /* Espacio para que el texto no quede pegado a los bordes */
+  text-align: center; /* Alinear el texto */
+}
+.border_azul {
+  width: 100px;
+  border-radius: 25px 0px 0px 25px;
+  background-color: #6F65CC;
+  height: auto;
+}
+.tabla {
+  display: grid;
+  grid-template-columns: 80px auto;
+  max-width: 800px;
+  border-collapse: collapse;
+  overflow: hidden;
+}
+.columna-izquierda {
+  background: #7167D0;
+  padding: 15px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.columna-derecha {
+  padding: 20px;
+  text-align: left !important;
+}
+.columna-derecha img {
+  width: 80px;
+  height: 80px;
+}
+.contenido {
+  align-items: center;
+  display: flex;
+}
+@media (max-width: 480px) {
+  .tabla {
+    display: grid;
+    grid-template-columns: 20px auto;
+    max-width: 800px;
+    border-collapse: collapse;
+    overflow: hidden;
+  }
+  .columna-derecha h4 {
+    margin: 0 20px 10px 0px;
+    font-size: 1.2rem;
+    letter-spacing: 0px;
+    font-family: 'PoppinsB';
+  }
+}
+/*    ESTILO MONTOS     */
+.fondomontos {
+  background-color: rgba(197, 217, 240, 0.5);
+  min-height: 500px; /* O usa height: 100vh; si quieres que ocupe toda la pantalla */
+  display: flex;
+  flex-direction: column; /* Asegura que los hijos se coloquen en columna */
+  justify-content: center /* Distribuye el contenido */
+}
+.fondomontosborder {
+  flex-grow: 1; /* Ocupa el espacio disponible */
+  max-width: calc(100% - 10px); /* Resta 20px de cada lado */
+  margin: 0 auto; /* Centra el div dentro del contenedor */
+  justify-content: center; /* Centra horizontalmente */
+  border-top: 1px dashed #1D1D1B;
+  border-bottom: 1px dashed #1D1D1B;
+  padding: 0px;
+  text-align: center;
+  width: 95%;
+}
+.containerM {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.leftM {
+  flex-shrink: 0;
+}
+.imageM {
+  width: 60px;
+  height: auto;
+}
+.rightM {
+  flex-grow: 1;
+}
+.rightM h2 {
+  margin: 0;
+  color: var(--tertiary-color);
+  font-size: 1.8rem;
+}
+.separatorM {
+  width: 2px;
+  height: 50px; /* Ajusta la altura de la línea */
+  background-color: #000;
+  margin: 0 20px;
+}
+.summaryM {
+  margin: 0;
+  text-align: left; /* Alineación a la izquierda */
+ 
+	color:#6e757c;
+}
+.h4M {
+  font-size: 1.2em;
+  letter-spacing: 0px;
+  font-family: 'PoppinsB';
+  color: #454544;
+}
+.linea-redondeada {
+  width: 100; /* Ancho de la línea */
+  height: 10px; /* Grosor de la línea */
+  background-color: #343460; /* Color de la línea */
+  border-radius: 50px; /* Bordes redondeados */
+}
+@media (max-width: 768px) {
+  .containerM {
+    padding: 15px;
+  }
+  
+  .imageM {
+    width: 40px;
+  }
+  
+  .containerM h2 {
+    font-size: 1.2rem;
+  }
+}
+/* como aplicar */
+.fondoaplicar {
+  background-image: url('../images/fondo_iconos.png'); /* Ruta de tu imagen */
+  background-size: cover; /* Hace que la imagen cubra todo el espacio */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita repeticiones */
+  min-height: 300px; /* Al menos el alto de la pantalla */
+  align-items: center; /* Centra verticalmente */
+  min-height: 500px; /* O usa height: 100vh; si quieres que ocupe toda la pantalla */
+  display: flex;
+  flex-direction: column; /* Asegura que los hijos se coloquen en columna */
+  justify-content: center /* Distribuye el contenido */
+}
+.fondoaplicarborder {
+  flex-grow: 1; /* Ocupa el espacio disponible */
+  max-width: calc(100% - 10px); /* Resta 20px de cada lado */
+  margin: 0 auto; /* Centra el div dentro del contenedor */
+  justify-content: center; /* Centra horizontalmente */
+  border-bottom: 1px dashed #1D1D1B;
+  padding: 0px;
+  text-align: center;
+  width: 95%;
+}
+.seccionCA {
+  width: 85%;
+  background-color: #7367D7;
+  border-radius: 20px;
+  padding: 20px;
+  position: relative;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  z-index: 2
+}
+.imagen-superior {
+  position: absolute;
+  bottom: 0px;
+  left: -40px;
+  width: 50%;
+  height: auto;
+  z-index: 3
+}
+.h3CA {
+  font-size: 3.5em;
+  letter-spacing: 0px;
+  font-family: 'PoppinsB';
+  color: #fff;
+  display: block;
+  padding-right: 100px;
+  padding-top: 50px;
+  line-height: 55px;
+}
+.contenidoB {
+  display: flex;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 400px;
+}
+.contenidobotones {
+  padding-bottom: 10px;
+  margin-left: 20px;
+  border-bottom: 1px dashed #1D1D1B;
+  width: 100%;
+  text-align: left;
+  padding-left: 10px
+}
+.h5CA {
+  font-size: 1.1em;
+  letter-spacing: 0px;
+  font-family: 'PoppinsL';
+  color: #fff;
+  text-decoration: none;
+}
+.h5CA:hover {
+  color: #C5D9F0;
+}
+
+
+.h6CA {
+  font-size: 0.8em;
+  letter-spacing: 0px;
+  font-family: 'PoppinsL';
+  color: #C5D9F0;
+  text-decoration: none;
+}
+.h6CA:hover {
+  color: #C5D9F0;
+	text-decoration: underline;
+}
+
+
+
+.h4CABold {
+  font-size: 1.1em;
+  letter-spacing: 0px;
+  font-family: 'PoppinsSB';
+  color: #fff;
+}
+.h4CABold:hover {
+  /*color: #C5D9F0;*/
+}
+.imgCA {
+  width: 28px;
+  height: 100%;
+}
+.separadorImg {
+  line-height: 40px
+}
+@media (max-width: 768px) {
+  .seccionCA {
+    width: 110%;
+  }
+  .imagen-superior {
+    width: 70%;
+    height: auto;
+  }
+  .h5CA {
+    font-size: 0.9em;
+    letter-spacing: 0px;
+    font-family: 'PoppinsR';
+    color: #fff;
+    text-decoration: none;
+  }
+  .h5CA:hover {
+    color: #C5D9F0;
+  }
+  .h4CABold {
+    font-size: 0.9em;
+    letter-spacing: 0px;
+    font-family: 'PoppinsSB';
+    color: #fff;
+  }
+  .h4CABold:hover {
+    color: #C5D9F0;
+  }
+  .contenidoB {
+    width: 280px;
+    margin-bottom: 5px;
+  }
+  .imgCA {
+    width: 25px;
+    height: 100%;
+  }
+  .imagen-superior {
+    left: 12%;
+    width: 80%;
+  }
+  .h3CA {
+    font-size: 2.5em;
+    letter-spacing: 0px;
+    font-family: 'PoppinsB';
+    color: #fff;
+    display: block;
+    padding-top: 10px;
+    line-height: 55px;
+    text-align: center
+  }
+  .separadorImg {
+    line-height: 200px
+  }
+}
+/* FINALIZACION */
+.containerF {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 100px;
+}
+.contenedorSC {
+  overflow-y: scroll; /* Siempre visible */
+  max-height: 145px;
+}
+/* Asegura que el scrollbar esté siempre visible en Mac */
+.contenedorSC::-webkit-scrollbar {
+  width: 15px; /* Ancho de la barra de desplazamiento */
+  height: 15px; /* Alto de la barra de desplazamiento para scroll horizontal */
+}
+.contenedorSC::-webkit-scrollbar-thumb {
+  background-color: #525B64; /* Color del thumb (parte móvil) */
+  border-radius: 10px; /* Redondeo del thumb */
+  border: 3px solid #EDEFEF;
+}
+.contenedorSC::-webkit-scrollbar-track {
+  background-color: #EDEFEF; /* Color del track (parte fija) */
+  border-radius: 10px;
+}
+@media (max-width: 768px) {
+  .containerF {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 0px;
+    margin-top: 20px
+  }
+}
+/* DATOS CURIOSOS   */
+.imagen-superiorD {
+  position: absolute;
+  top: 10px;
+  right: -40px;
+  width: 25%;
+  height: auto;
+  z-index: 1;
+}
+.imagen-inferiorD {
+  position: absolute;
+  bottom: 50px;
+  right: 40px;
+  width: 25%;
+  height: auto;
+  z-index: 3
+}
+.h3F {
+  font-size: 2.5em;
+  letter-spacing: 0px;
+  font-family: 'PoppinsB';
+  color: #fff;
+  display: block;
+  padding-right: 100px;
+  padding-top: 50px;
+  line-height: 55px;
+}
+.separadorImgF {
+  line-height: 100px
+}
+@media (max-width: 768px) {
+  .imagen-inferiorD {
+    bottom: 50px;
+    right: 40px;
+    width: 80%;
+  }
+  .h3F {
+    font-size: 1.8em;
+    letter-spacing: -2px;
+    line-height: 30px;
+  }
+  .separadorImgF {
+    line-height: 450px
+  }
+}
+/*   DATOS CURIOSOS  */
+.datos-curiosos {
+  background: linear-gradient(to bottom, rgba(228, 236, 246, 1), 50%, rgba(244, 247, 251, 1) 50%); /* Fondo con opacidad en el blanco */
+  text-align: center;
+}
+.espacioTituloDC {
+  top: -4%;
+}
+@media (min-width: 769px) and (max-width: 1366px) {
+  .espacioTituloDC {
+    top: -3%;
+  }
+}
+.custom-list {
+  list-style: none;
+  padding: 50px 200px;
+  margin: 0;
+}
+.custom-list li {
+  padding: 20px 20px 20px 30px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.custom-list li::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background-color: #7167D0;
+  border-radius: 50%;
+  position: absolute;
+  left: 10px;
+  top: 32px;
+  transform: translateY(-50%);
+}
+.custom-list li span {
+  display: block;
+  padding-left: 20px;
+}
+/* Borde dashed sin ocupar la viñeta */
+.custom-list li::after {
+  content: "";
+  position: absolute;
+  left: 30px; /* Ajustamos para que el borde inicie después de la viñeta */
+  bottom: 0;
+  width: calc(100% - 30px); /* Evita que el borde cruce la viñeta */
+  height: 2px;
+  border-bottom: 2px dashed rgba(113, 103, 208, 0.4);
+}
+/* Media Query para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .custom-list {
+    padding: 20px 40px;
+  }
+  .custom-list li {
+    padding: 15px 10px 15px 20px;
+    gap: 8px;
+  }
+  .custom-list li::before {
+    width: 6px;
+    height: 6px;
+  }
+  .custom-list li::after {
+    width: calc(100% - 20px);
+  }
+}
+/* Media Query para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .custom-list {
+    padding: 10px 10px;
+  }
+  .custom-list li {
+    padding: 10px 5px 10px 20px;
+    gap: 5px;
+  }
+  .custom-list li::before {
+    width: 5px;
+    height: 5px;
+    top: 20px;
+  }
+  .custom-list li::after {
+    width: calc(100% - 15px);
+  }
+}
+/* Para móviles: la línea se mantiene arriba */
+@media (max-width: 767px) {
+  .espacioTituloDC {
+    top: -4%;
+  }
+}
+
+/* Preguntas Frecuentes */
+
+
+.contenedorPF {
+  background-color: var(--tertiary-color);
+}
+
+
+.tituloPF {
+ 
+  color: #fff;
+  font-family: 'PoppinsSB';
+  font-size: 2.0rem;
+  letter-spacing: -1px;
+}
+
+
+
+
+
+.textNegritaPF{
+	 
+	font-family: 'PoppinsSB';
+	
+}
+
+
+/* Quitar fondo y bordes predeterminados */
+.accordion-button {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 10px 0;
+}
+/* Bordes superior e inferior en cada opción */
+.accordion-item {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-left: none;
+  border-right: none;
+}
+/* Cambiar el color del texto */
+.accordion-button {
+  color: black;
+  font-weight: bold;
+}
+/* Rotar el icono de Bootstrap cuando está abierto */
+.accordion-button::after {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+.accordion-button:not(.collapsed)::after {
+  transform: rotate(180deg);
+}
+.accordion-button {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 10px 0;
+}
+/* Bordes superior e inferior en cada opción */
+.accordion-item {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-left: none;
+  border-right: none;
+}
+/* Cambiar el color del texto */
+.accordion-button {
+  color: black;
+  font-weight: bold;
+}
+/* Rotar el icono de Bootstrap cuando está abierto */
+.accordion-button::after {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+.accordion-button:not(.collapsed)::after {
+  transform: rotate(180deg);
+}
+.contAcordeon {
+  width: 60%;
+}
+@media (max-width: 767px) {
+  .contAcordeon {
+    width: 90%;
+  }
+}
+
+
+
+/*****************/
+/*  BOTONES      */
+/*****************/
+
+a.botAfilateYa {
+  background-image: url('../images/bot_AfiliateYa_off.png');
+  background-repeat: no-repeat;
+	background-position: center;
+  background-size: 60%;
+  width: 356px;
+  height: 100px;
+  display: block;
+
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: ease;
+  transition-delay: 0.2s;
+  text-align: center; 
+  margin-left: auto;
+  margin-right: auto;
+  border:0px solid #000;
+ 
+}
+a.botAfilateYa:hover {
+  background-image: url("../images/bot_AfiliateYa_on.png");
+  background-repeat: no-repeat;
+  background-size: 60%;
+  width: 356px;
+  height: 100px;
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: ease;
+  transition-delay: 0.2s;
+  transform: scale(1.05);
+}
+
+a.botAJoven {
+  background-image: url('../images/bot_Afiliacion_Joven_off.png');
+  background-repeat: no-repeat;
+	background-position: center;
+  background-size: 60%;
+  width: 356px;
+  height: 100px;
+  display: block;
+
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: ease;
+  transition-delay: 0.2s;
+  text-align: center; 
+  margin-left: auto;
+  margin-right: auto;
+  border:0px solid #000;
+ 
+}
+a.botAJoven:hover {
+  background-image: url("../images/bot_Afiliacion_Joven_on.png");
+  background-repeat: no-repeat;
+  background-size: 60%;
+  width: 356px;
+  height: 100px;
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: ease;
+  transition-delay: 0.2s;
+  transform: scale(1.05);
+}
+
+a.botAExterior {
+  background-image: url('../images/bot_AfiliadoExterior_off.png');
+  background-repeat: no-repeat;
+	background-position: center;
+  background-size: 60%;
+  width: 356px;
+  height: 100px;
+  display: block;
+
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: ease;
+  transition-delay: 0.2s;
+  text-align: center; 
+  margin-left: auto;
+  margin-right: auto;
+  border:0px solid #000;
+ 
+}
+a.botAExterior:hover {
+  background-image: url("../images/bot_AfiliadoExterior_on.png");
+  background-repeat: no-repeat;
+  background-size: 60%;
+  width: 356px;
+  height: 100px;
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: ease;
+  transition-delay: 0.2s;
+  transform: scale(1.05);
+}
+
+a.botTNRH {
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+  background: url('../../assets/images/bot_TNRH_off.png') no-repeat center center;
+  background-size: contain;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    background-image: url('../../assets/images/bot_TNRH_on.png');
+    transform: scale(1.05);
+  }
+}
+
+.botAJ {
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+  background: url('../../assets/images/bot_AJ_off.png') no-repeat center center;
+  background-size: contain;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    background-image: url('../../assets/images/bot_AJ_on.png');
+    transform: scale(1.05);
+  }
+}
+
+.botAV {
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+  background: url('../../assets/images/bot_AV_off.png') no-repeat center center;
+  background-size: contain;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    background-image: url('../../assets/images/bot_AV_on.png');
+    transform: scale(1.05);
+  }
+}
+
+.botGC {
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+  background: url('../../assets/images/bot_GC_off.png') no-repeat center center;
+  background-size: contain;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    background-image: url('../../assets/images/bot_GC_on.png');
+    transform: scale(1.05);
+  }
+}
+
+/* Media queries para los botones */
+@media (max-width: vars.$desktop-sm) {
+  .botTNRH, .botAJ, .botAV, .botGC {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: vars.$tablet) {
+  .botTNRH, .botAJ, .botAV, .botGC {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: vars.$mobile) {
+  .botTNRH, .botAJ, .botAV, .botGC {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/*******            ***********/
+
+/* Estilos para la sección de protegidos */
+.imagen-protegidos {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+}
+
+.imagen-protegidos img {
+  max-width: 90%;
+  height: auto;
+}
+
+.beneficiarios-lista {
+  padding: 20px 20px 20px 0;
+}
+
+.beneficiarios-lista p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  padding-left: 25px;
+}
+
+.lista-beneficiarios {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lista-beneficiarios li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.lista-beneficiarios li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--secondary-color);
+  font-size: 1.5rem;
+  line-height: 1;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .beneficiarios-lista {
+    padding: 15px 15px 15px 0;
+  }
+  
+  .beneficiarios-lista p {
+    font-size: 1.1rem;
+    text-align: left;
+    padding-left: 25px;
+  }
+  
+  .lista-beneficiarios li {
+    font-size: 1rem;
+    text-align: left;
+    padding-left: 25px;
+  }
+}
+
+/* Estilos para la sección de agendamiento */
+.seccion-agendamiento {
+  background-color: var(--primary-color);
+  padding: 80px 0;
+  position: relative;
+  width: 100%;
+
+  .container {
+    .row {
+      align-items: center;
+    }
+  }
+}
+
+.cuadro-texto-agendamiento {
+  background-color: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: 100%;
+
+  .texto-contenido {
+    p {
+      color: #1D1D1B;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 0;
+      font-family: 'PoppinsR';
+    }
+  }
+}
+
+a.botAgendamiento {
+  background-image: url('../images/bot_agendamiento_off.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 356px;
+  height: 100px;
+  display: block;
+  transition: transform 0.3s ease;
+  margin: 0 auto;
+
+  &:hover {
+    background-image: url('../images/bot_agendamiento_on.png');
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 992px) {
+  .seccion-agendamiento {
+    padding: 40px 0;
+  }
+
+  .cuadro-texto-agendamiento {
+    padding: 25px;
+    margin-bottom: 30px;
+
+    .texto-contenido p {
+      text-align: center;
+    }
+  }
+
+  a.botAgendamiento {
+    width: 280px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 576px) {
+  a.botAgendamiento {
+    width: 240px;
+    height: 70px;
+  }
+}
+
+/* Estilos responsive para la sección de agendamiento */
+@media (max-width: 768px) {
+  .seccion-agendamiento {
+    flex-direction: column;
+    padding: 30px 15px;
+    gap: 20px;
+  }
+
+  .cuadro-texto-agendamiento {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .texto-contenido {
+    text-align: center;
+  }
+
+  a.botAgendamiento {
+    width: 280px;
+    height: 80px;
+  }
+}
+
+
+

@@ -1,0 +1,171 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importaciones */
+@use 'assets/styles/_variables' as vars;
+@use 'assets/styles/_fonts' as *;
+@use 'bootstrap/scss/bootstrap' as *;
+@use 'assets/styles/_navbar' as *;
+@use 'assets/styles/_banner' as *;
+@use 'assets/styles/_protegidos' as *;
+@use 'assets/styles/_agendamiento' as *;
+@use 'assets/styles/estilo' as *;
+
+/* Estilos globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    min-height: 100%;
+    font-family: vars.$font-family-regular;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    color: vars.$gray;
+}
+
+body {
+    padding-top: 80px; /* Espacio para el navbar fijo */
+}
+
+/* Efectos fade al scroll */
+.fade-in-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-scroll.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Variantes del efecto fade */
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-left.fade-in-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-right.fade-in-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-up.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in-scale {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-scale.fade-in-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Contenedores */
+.custom-container {
+    width: 100%;
+    margin: auto;
+    background-color: vars.$white;
+}
+
+.custom-container-interno {
+    width: 65%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Media queries para contenedores */
+@media (max-width: vars.$desktop) {
+    .custom-container {
+        width: 100%;
+        padding: 1rem;
+        max-width: vars.$desktop;
+    }
+
+    .custom-container-interno {
+        width: 90%;
+    }
+}
+
+@media (max-width: vars.$desktop-lg) {
+    .custom-container-interno {
+        width: 90%;
+    }
+}
+
+/* Clases de utilidad */
+.fondoPlomo {
+    background: vars.$light-bg !important;
+}
+
+/* Espaciados para navegación */
+.separadormenu {
+    scroll-margin-top: 150px;
+}
+
+.separadormenuI,
+.separadormenuAJ,
+.separadormenuAV,
+.separadormenuGC,
+.separadormenuTNRH,
+.separadormenuAE {
+    scroll-margin-top: 120px;
+}
+
+.separadormenuSL,
+.separadormenuVT,
+.separadormenuPF {
+    scroll-margin-top: 150px;
+}
+
+/* Celdas y espaciados */
+.cel1 {
+    width: 20%;
+    padding-left: 10px;
+}
+
+.cel2 {
+    width: 80%;
+    padding-left: 10px;
+}
+
+.espacioTop {
+    margin-top: 200px;
+}
+
+/* Media queries para móviles */
+@media (max-width: vars.$tablet) {
+    .espacioTop {
+        margin-top: 100px;
+    }
+
+    .cel1, .cel2 {
+        width: 100%;
+        padding: 10px;
+    }
+}

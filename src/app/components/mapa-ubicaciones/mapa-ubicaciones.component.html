@@ -1,0 +1,181 @@
+<div class="mapa-container">
+  <!-- Título similar al de protegidos -->
+  <section id="titulo-mapa" class="contenedorPF py-1 py-md-2b">
+    <div class="row text-center d-flex">
+      <div class="d-flex align-items-center cel1">
+        <!-- Contenido 20% (Vacío) -->
+      </div>
+      <div class="d-flex justify-content-start align-items-center cel2">
+        <div class="tituloPF">Lista de Unidades Médicas y Niveles de Atención</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Barra de búsqueda alineada con el mapa -->
+  <div class="mapa-toolbar-row">
+    <div class="mapa-toolbar-spacer" aria-hidden="true"></div>
+    <div class="search-bar">
+      <div class="search-input">
+        <i class="fas fa-search"></i>
+        <input 
+          type="text" 
+          [(ngModel)]="terminoBusqueda" 
+          (input)="buscarPorNombre()" 
+          placeholder="Unidad, siglas o calle"
+        >
+      </div>
+      <div class="location-actions" *ngIf="esDispositivoMovil">
+        <button
+          type="button"
+          (click)="solicitarUbicacionUsuario()"
+          class="location-btn"
+          [disabled]="obteniendoUbicacion"
+          title="Usar la ubicación GPS de su celular"
+        >
+          <i class="fas" [ngClass]="obteniendoUbicacion ? 'fa-spinner fa-spin' : 'fa-location-arrow'"></i>
+          {{ obteniendoUbicacion ? 'Buscando...' : 'Mi ubicación' }}
+        </button>
+      </div>
+      <span class="ubicacion-badge ubicacion-badge--gps" *ngIf="origenUbicacion === 'gps' && userLocation">
+        Ubicación del celular activa
+      </span>
+      <span class="ubicacion-badge ubicacion-badge--destino" *ngIf="unidadDestinoActiva">
+        Destino: {{ unidadDestinoActiva.siglas }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Aviso discreto (sin modal) si Chrome tiene permiso pero el PC no da ubicación -->
+  <div class="mapa-toolbar-row" *ngIf="mensajeUbicacionInline">
+    <div class="mapa-toolbar-spacer" aria-hidden="true"></div>
+    <div class="ubicacion-inline-alerta">
+      <i class="fas fa-info-circle"></i>
+      <span>{{ mensajeUbicacionInline }}</span>
+      <button type="button" class="ubicacion-inline-cerrar" (click)="mensajeUbicacionInline = ''" aria-label="Cerrar">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal antes de abrir Google Maps -->
+  <div class="modal-ubicacion-overlay" *ngIf="mostrarModalGoogleMaps" (click)="cerrarModalGoogleMaps()">
+    <div class="modal-ubicacion" (click)="$event.stopPropagation()">
+      <h3>Abrir en Google Maps</h3>
+      <p class="modal-mensaje-info">
+        Se abrirá Google Maps con la unidad médica marcada.
+        <strong>Busque allí su ubicación</strong> (o use «Tu ubicación») y luego elija
+        <strong>«Cómo llegar»</strong> para ver la ruta.
+        No se mostrará ninguna ruta hasta que usted la solicite.
+      </p>
+      <div class="modal-ubicacion-actions">
+        <button type="button" class="btn-primario" (click)="confirmarAbrirGoogleMaps()">
+          Abrir Google Maps
+        </button>
+        <button type="button" class="btn-cancelar" (click)="cerrarModalGoogleMaps()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal solo si Chrome bloqueó el permiso para este sitio -->
+  <div class="modal-ubicacion-overlay" *ngIf="mostrarModalUbicacionPc" (click)="cerrarModalUbicacionPc()">
+    <div class="modal-ubicacion" (click)="$event.stopPropagation()">
+      <h3>{{ esDispositivoMovil ? 'Ubicación del celular' : 'Permiso de ubicación bloqueado' }}</h3>
+      <p class="modal-mensaje-error">{{ mensajeErrorUbicacion }}</p>
+      <div class="modal-ubicacion-actions">
+        <button type="button" class="btn-primario" (click)="reintentarGeolocalizacion()">
+          {{ esDispositivoMovil ? 'Ya lo activé — usar Mi ubicación' : 'Ya lo activé — intentar de nuevo' }}
+        </button>
+        <button
+          type="button"
+          class="btn-marcar"
+          *ngIf="unidadDestinoActiva"
+          (click)="abrirUbicacionEnGoogleMaps(); cerrarModalUbicacionPc()"
+        >
+          Abrir en Google Maps
+        </button>
+        <button type="button" class="btn-cancelar" (click)="cerrarModalUbicacionPc()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-container">
+    <!-- Panel izquierdo con filtros y resultados -->
+    <div class="left-panel">
+      <div class="filters-section">
+        <h2>Buscar Unidades Médicas</h2>
+        
+        <!-- Filtro de Provincia -->
+        <div class="filter-group">
+          <label>Provincia</label>
+          <div class="select-wrapper">
+            <select [(ngModel)]="provinciaSeleccionada" (change)="filtrarPorProvincia()">
+              <option value="">Todas las provincias</option>
+              <option *ngFor="let provincia of provincias" [value]="provincia">{{ provincia }}</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Filtro de Nivel -->
+        <div class="filter-group">
+          <label>Nivel</label>
+          <div class="select-wrapper">
+            <select [(ngModel)]="nivelSeleccionado" (change)="filtrarPorNivel()">
+              <option [ngValue]="null">Todos los niveles</option>
+              <option *ngFor="let nivel of niveles" [ngValue]="nivel">Nivel {{ nivel }}</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Botón Limpiar Filtros -->
+        <button *ngIf="filtroAplicado" (click)="limpiarFiltros()" class="btn-limpiar">
+          <i class="fas fa-times"></i>
+          Limpiar filtros
+        </button>
+      </div>
+
+      <!-- Resultados en formato lista -->
+      <div class="results-section" *ngIf="filtroAplicado">
+        <h2>Resultados ({{ getTotalUnidades() }})</h2>
+        <p class="cargando-filtros" *ngIf="cargandoUnidades">
+          <i class="fas fa-spinner fa-spin"></i> Consultando API...
+        </p>
+        <p class="error-filtros" *ngIf="errorCargaUnidades">{{ errorCargaUnidades }}</p>
+        <div class="results-list" *ngIf="!cargandoUnidades">
+          <div class="result-item" *ngFor="let provincia of provinciasFiltradas">
+            <div *ngFor="let unidad of provincia.unidades">
+              <div class="hospital-info">
+                <h3>{{ unidad.siglas }}</h3>
+                <p class="hospital-name">{{ unidad.nombre }}</p>
+                <p class="hospital-address">{{ unidad.direccion }}</p>
+                <p class="hospital-level">Nivel {{ unidad.nivel }}</p>
+                <div class="hospital-actions">
+                  <button class="action-btn phone" (click)="llamarUnidad(unidad.telefono)" title="Llamar">
+                    <i class="fas fa-phone"></i>
+                  </button>
+                  <a class="action-btn web" *ngIf="unidad.sitio_web" [href]="unidad.sitio_web" target="_blank" title="Visitar sitio web">
+                    <i class="fas fa-globe"></i>
+                  </a>
+                  <button class="action-btn map" (click)="centrarEnUnidad(unidad.latitud, unidad.longitud, unidad.nombre, unidad)" title="Ver en mapa">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </button>
+                  <button class="action-btn route" (click)="mostrarRuta(unidad.latitud, unidad.longitud, unidad)" title="Ver en Google Maps">
+                    <i class="fas fa-route"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mapa central -->
+    <div class="map-container">
+      <div id="mapa-ubicaciones"></div>
+    </div>
+  </div>
+</div> 

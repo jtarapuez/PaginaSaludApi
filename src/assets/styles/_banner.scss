@@ -1,0 +1,266 @@
+@use 'variables' as vars;
+
+/* Estilos del banner */
+.banner-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+}
+
+.banner {
+  /*background-color: vars.$white;*/
+  padding: 60px 0;
+  margin-top: 80px;
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+  min-height: 600px;
+  margin: 0;
+ /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+}
+
+/* Contenido de texto */
+.text-content {
+  padding: 100px;
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: fadeInLeft vars.$animation-duration forwards 0.3s;
+  position: relative;
+  z-index: 1;
+  text-align: justify !important;
+}
+
+.Titulo {
+  font-size: 2.5rem !important;
+  font-family: vars.$font-family-bold;
+  color: vars.$tertiary-color;
+  line-height: 45px;
+  margin: 0;
+}
+
+.Subtitulo {
+  font-size: 2.5rem !important;
+  line-height: 40px;
+  color: vars.$secondary-color;
+  font-family: vars.$font-family-regular;
+  margin: 0;
+}
+
+.subtitle {
+  color: vars.$text-color;
+  margin: 25px 0 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp vars.$animation-duration forwards 1s;
+  font-family: vars.$font-family-semibold;
+}
+
+.description {
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp vars.$animation-duration forwards 0.6s;
+  color: vars.$text-color;
+  font-family: vars.$font-family-regular;
+  color: vars.$gray;
+  font-size: 1rem;
+}
+
+.description:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+/* Contenedor de imagen */
+.image-container1 {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Fondo turquesa con bordes redondeados específicos */
+.turquoise-bg {
+  position: absolute;
+  width: 75%;
+  height: 55%;
+  background: linear-gradient(135deg, #5B9BD5 0%, #2E75B6 100%);
+  border-radius: 55px 0 0 55px;
+  right: 15%;
+  top: 12%;
+  z-index: 0;
+  opacity: 0;
+  transform: translateX(30px);
+  animation: slideInRightSubtle 1.5s forwards 0.2s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.family-image {
+  width: 660px;
+  height: 660px;
+  position: relative;
+  opacity: 0;
+  transform: scale(0.9);
+  animation: zoomIn vars.$animation-duration forwards 0.5s;
+  z-index: 1;
+  object-fit: contain;
+}
+
+/* Círculos decorativos blancos */
+.decoration-circle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: vars.$white;
+  border: none;
+  opacity: 0;
+  z-index: 2;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 0px solid #000;
+}
+
+.circle1 {
+  width: 80px;
+  height: 80px;
+  top: 20%;
+  left: 5%;
+  opacity: 0;
+  animation: fadeIn 1s forwards 1s, gentleFloat 4s infinite ease-in-out 2s;
+}
+
+.circle2 {
+  width: 80px;
+  height: 80px;
+  top: 20%;
+  right: 9%;
+  opacity: 0;
+  animation: fadeIn 1s forwards 1.5s, gentleFloat 4s infinite ease-in-out 3s;
+}
+
+/* Animaciones */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRightSubtle {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Media queries */
+@media (max-width: vars.$tablet) {
+  .banner {
+    padding: 40px 0;
+    margin-top: 60px;
+    min-height: auto;
+  }
+
+  .text-content {
+    padding: 50px 20px;
+    text-align: center !important;
+  }
+
+  .Titulo {
+    font-size: 1.8rem !important;
+    line-height: 35px;
+  }
+
+  .Subtitulo {
+    font-size: 1.5rem !important;
+    line-height: 30px;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    margin: 20px 0 10px;
+  }
+
+  .family-image {
+    width: 400px;
+    height: 400px;
+  }
+
+  .turquoise-bg {
+    width: 80%;
+    height: 50%;
+    right: 10%;
+    top: 15%;
+  }
+
+  .decoration-circle {
+    display: none;
+  }
+}
+
+@media (max-width: vars.$mobile) {
+  .family-image {
+    width: 300px;
+    height: 300px;
+  }
+
+  .turquoise-bg {
+    width: 85%;
+    height: 45%;
+    right: 7.5%;
+  }
+
+  .text-content {
+    padding: 30px 15px;
+  }
+} 

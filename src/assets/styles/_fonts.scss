@@ -1,0 +1,76 @@
+@use 'variables' as vars;
+
+// Importación de fuentes
+@font-face {
+  font-family: 'PoppinsL';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../fonts/Poppins-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'PoppinsR';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'PoppinsSB';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../fonts/Poppins-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'PoppinsB';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/Poppins-Bold.ttf') format('truetype');
+}
+
+// Estilos base de tipografía
+h2 {
+  margin: 0;
+  color: vars.$tertiary-color;
+  font-size: vars.$text-size;
+  letter-spacing: -1px;
+  font-family: vars.$font-family-bold;
+  line-height: 60px;
+}
+
+h3 {
+  margin: 0;
+  color: vars.$secondary-color;
+  font-size: vars.$text-size;
+  letter-spacing: -1px;
+  font-family: vars.$font-family-regular;
+}
+
+h4 {
+  margin: 0 20px 10px 0;
+  font-size: vars.$text-size;
+  letter-spacing: 0;
+  font-family: vars.$font-family-semibold;
+}
+
+h5 {
+  margin: 0;
+  color: vars.$secondary-color;
+  font-size: vars.$text-size;
+  letter-spacing: -1px;
+  font-family: vars.$font-family-semibold;
+  line-height: 60px;
+}
+
+// Media queries
+@media (max-width: vars.$tablet) {
+  h2 {
+    font-size: 1.2rem;
+    line-height: 25px;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+} 
