@@ -1,0 +1,53 @@
+<section id="queCubreSeguro" class="cobertura-seguro-section">
+  <div class="custom-container-interno cobertura-seguro-inner">
+    <header class="cobertura-header fade-in-up">
+      <div class="cobertura-header-left">
+        <span class="cobertura-header-icon-wrap" aria-hidden="true">
+          <img
+            src="assets/images/ico_Seguro_Salud.png"
+            alt=""
+            class="cobertura-header-icon"
+            width="38"
+            height="38"
+          >
+        </span>
+        <h2 class="cobertura-header-title">{{ sectionTitle }}</h2>
+      </div>
+      <div class="cobertura-header-separator" aria-hidden="true"></div>
+      <p class="cobertura-header-summary">{{ sectionSummary }}</p>
+    </header>
+
+    <!-- PC: imagen completa + texto superpuesto a la izquierda -->
+    <div class="cobertura-banner-desktop fade-in-scale" role="region" aria-label="Derechos del afiliado">
+      <img
+        src="assets/images/img_Seguro_Salud.png"
+        alt=""
+        class="cobertura-banner-image img-fluid"
+        width="1200"
+        height="420"
+        loading="lazy"
+        aria-hidden="true"
+      >
+      <div class="cobertura-banner-overlay">
+        <h3 class="cobertura-banner-heading">El afiliado tiene derecho a:</h3>
+        <ul class="cobertura-banner-list">
+          @for (item of derechosAfiliado; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- Móvil: tarjeta azul con texto y viñetas -->
+    <div class="cobertura-banner-mobile fade-in-scale" role="region" aria-label="Derechos del afiliado">
+      <div class="cobertura-banner-card">
+        <h3 class="cobertura-banner-heading">El afiliado tiene derecho a:</h3>
+        <ul class="cobertura-banner-list">
+          @for (item of derechosAfiliado; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

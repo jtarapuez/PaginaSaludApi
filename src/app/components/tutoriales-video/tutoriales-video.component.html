@@ -1,0 +1,118 @@
+<section id="video" class="tutoriales-section separadormenuVT">
+  <div class="tutoriales-header">
+    <div class="custom-container-interno tutoriales-header-inner">
+      <h2 class="tutoriales-title">TUTORIALES AGENDAMIENTO DE CITAS MÉDICAS</h2>
+    </div>
+  </div>
+
+  <div class="tutoriales-body">
+    <div class="custom-container-interno tutoriales-carousel-wrap">
+      <div
+        id="tutorialesVideoCarousel"
+        class="carousel slide tutoriales-carousel"
+        data-bs-ride="false"
+        data-bs-interval="false"
+        data-bs-touch="true"
+        data-bs-wrap="true"
+      >
+        <div class="carousel-inner">
+          @for (slide of slides; track $index; let slideIndex = $index) {
+            <div
+              class="carousel-item"
+              [attr.data-slide-index]="slideIndex"
+            >
+              <div class="row g-4 justify-content-center tutorial-slide-row">
+                @for (video of slide; track video.youtubeId) {
+                  <div
+                    class="col-12 d-flex justify-content-center"
+                    [class.col-md-6]="itemsPerSlide === 2"
+                    [class.col-lg-4]="itemsPerSlide === 3"
+                  >
+                    <button
+                      type="button"
+                      class="tutorial-video-card"
+                      (click)="openVideo(video)"
+                      [attr.aria-label]="'Reproducir video: ' + video.title"
+                    >
+                      <div class="tutorial-thumbnail">
+                        <img [src]="thumbnailUrl" [alt]="video.title" loading="lazy">
+                        <span class="tutorial-play" aria-hidden="true"></span>
+                        <span class="tutorial-duration">{{ video.duration }}</span>
+                      </div>
+                      <div class="tutorial-card-body">
+                        <h3 class="tutorial-card-title">{{ video.title }}</h3>
+                        <p class="tutorial-card-date">{{ video.date }}</p>
+                      </div>
+                    </button>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      @if (slides.length > 1) {
+        <button
+          class="carousel-control-prev tutorial-carousel-control"
+          type="button"
+          data-bs-target="#tutorialesVideoCarousel"
+          data-bs-slide="prev"
+          aria-label="Anterior"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button
+          class="carousel-control-next tutorial-carousel-control"
+          type="button"
+          data-bs-target="#tutorialesVideoCarousel"
+          data-bs-slide="next"
+          aria-label="Siguiente"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+
+        <div class="carousel-indicators tutorial-carousel-indicators">
+          @for (slide of slides; track $index; let indicatorIndex = $index) {
+            <button
+              type="button"
+              data-bs-target="#tutorialesVideoCarousel"
+              [attr.data-bs-slide-to]="indicatorIndex"
+              [attr.aria-label]="'Ir al grupo de videos ' + (indicatorIndex + 1)"
+            ></button>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<div
+  class="modal fade"
+  id="tutorialesVideoModal"
+  tabindex="-1"
+  aria-labelledby="tutorialesVideoModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content tutorial-modal-content">
+      <div class="modal-header tutorial-modal-header">
+        <h5 class="modal-title" id="tutorialesVideoModalLabel">{{ selectedVideoTitle }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body p-0">
+        @if (safeVideoEmbedUrl) {
+          <div class="tutorial-modal-video">
+            <iframe
+              [src]="safeVideoEmbedUrl"
+              [title]="selectedVideoTitle"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

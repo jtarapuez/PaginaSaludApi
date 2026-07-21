@@ -1,20 +1,39 @@
-<div style="height: 120px"></div>
-<section id="inicioPagina" class="separadormenuI">
-  <div class="custom-section">
-    <div class="banner-container container-fluid custom-container-interno">
-      <div class="banner row align-items-center text-center">
-        <div class="text-content col-md-5">
-          <span class="Titulo">Seguro General <br>de Salud</span>
-          <h3 class="Subtitulo">Individual y Familiar</h3>
-          <br>
-          <h4 class="subtitle">¿Quiénes se pueden afiliar?</h4>
-          <p class="description">El Seguro General de Salud Individual y Familiar es uno de los cuatro seguros especializados del Instituto Ecuatoriano de Seguridad Social, IESS. Está orientado a brindar protección y bienestar a los asegurados, jubilados y beneficiarios con prestaciones de salud y servicios de calidad y calidez en contingencias de enfermedad y maternidad en sus 102 unidades médicas a escala nacional</p>
-        </div>
-        <div class="image-container1 col-md-7 d-flex justify-content-center align-items-center">
-          <div class="turquoise-bg"></div>
-          <img src="assets/images/img_doctora.png" alt="Familia" class="family-image">
-          <div class="decoration-circle circle1"></div>
-          <div class="decoration-circle circle2"></div>
+<div class="banner-spacer" aria-hidden="true"></div>
+<section id="inicioPagina" class="separadormenuI banner-section">
+  <div class="banner-container container-fluid custom-container-interno">
+    <div class="banner row align-items-center">
+      <div class="col-lg-5 col-12 banner-text fade-in-left">
+        <h1 class="banner-title">
+          <span class="banner-title-bold">Seguro General</span>
+          <span class="banner-title-regular">de Salud Individual<br>y Familiar</span>
+        </h1>
+
+        <h2 class="banner-heading">¿Quiénes somos?</h2>
+        <p class="banner-paragraph">
+          Brindamos bienestar a nuestros asegurados, jubilados y beneficiarios mediante el Seguro General de
+          Salud Individual y Familiar. Cubrimos contingencias de enfermedad y maternidad a través de nuestras
+          102 unidades médicas a escala nacional.
+        </p>
+
+        <h2 class="banner-heading">¿Quiénes están protegidos?</h2>
+        <ul class="banner-list">
+          @for (item of beneficiariosProtegidos; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </div>
+
+      <div class="col-lg-7 col-12 banner-visual fade-in-right">
+        <div class="banner-image-frame">
+          <img
+            src="assets/images/img_banner.png"
+            alt="Profesionales de salud del IESS"
+            class="banner-image"
+            width="702"
+            height="676"
+          >
+          <span class="banner-circle banner-circle--left" aria-hidden="true"></span>
+          <span class="banner-circle banner-circle--right" aria-hidden="true"></span>
         </div>
       </div>
     </div>

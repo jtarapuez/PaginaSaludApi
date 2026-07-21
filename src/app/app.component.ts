@@ -2,13 +2,20 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BannerComponent } from './components/banner/banner.component';
-import { ProtegidosComponent } from './components/protegidos/protegidos.component';
-import { AgendamientoComponent } from './components/agendamiento/agendamiento.component';
+import { TutorialesVideoComponent } from './components/tutoriales-video/tutoriales-video.component';
+import { CoberturaSeguroComponent } from './components/cobertura-seguro/cobertura-seguro.component';
 import { MapaUbicacionesComponent } from './components/mapa-ubicaciones/mapa-ubicaciones.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent, BannerComponent, ProtegidosComponent, AgendamientoComponent, MapaUbicacionesComponent],
+  imports: [
+    RouterOutlet,
+    NavbarComponent,
+    BannerComponent,
+    TutorialesVideoComponent,
+    CoberturaSeguroComponent,
+    MapaUbicacionesComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
