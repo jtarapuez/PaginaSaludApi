@@ -105,7 +105,7 @@ $text-color: #3f3e3e;
   padding: 2rem 1.5rem 2rem 2.25rem;
   text-align: left;
   color: vars.$white;
-  background: linear-gradient(90deg, $primary 78%, rgba($primary, 0.85) 90%, transparent 100%);
+  background: transparent;
   pointer-events: none;
 }
 

@@ -1,0 +1,66 @@
+<section id="preguntasFrecuentes" class="faq-section separadormenu">
+  <div class="faq-header fade-in-up">
+    <div class="custom-container-interno faq-header-inner">
+      <h2 class="faq-title">{{ sectionTitle }}</h2>
+    </div>
+  </div>
+
+  <div class="faq-body fade-in-scale">
+    <div class="custom-container-interno faq-accordion-wrap">
+      <div class="faq-accordion" role="region" aria-label="Preguntas frecuentes del IESS">
+        @for (item of preguntas; track item.pregunta; let i = $index) {
+          <div class="faq-item" [class.is-open]="estaAbierta(i)">
+            <h3 class="faq-item-heading">
+              <button
+                type="button"
+                class="faq-trigger"
+                [attr.id]="'faq-trigger-' + i"
+                [attr.aria-expanded]="estaAbierta(i)"
+                [attr.aria-controls]="'faq-panel-' + i"
+                (click)="alternar(i)"
+              >
+                <span class="faq-question">{{ item.pregunta }}</span>
+                <i
+                  class="fas fa-chevron-down faq-icon"
+                  [class.is-open]="estaAbierta(i)"
+                  aria-hidden="true"
+                ></i>
+              </button>
+            </h3>
+
+            <div
+              class="faq-panel"
+              [attr.id]="'faq-panel-' + i"
+              role="region"
+              [attr.aria-labelledby]="'faq-trigger-' + i"
+              [class.is-open]="estaAbierta(i)"
+              [hidden]="!estaAbierta(i)"
+            >
+              @if (item.parrafos?.length) {
+                @for (parrafo of item.parrafos; track parrafo) {
+                  <p class="faq-answer-text">{{ parrafo }}</p>
+                }
+              }
+
+              @if (item.bullets?.length) {
+                <ul class="faq-answer-list">
+                  @for (bullet of item.bullets; track bullet) {
+                    <li>{{ bullet }}</li>
+                  }
+                </ul>
+              }
+
+              @if (item.pasos?.length) {
+                <ol class="faq-answer-steps">
+                  @for (paso of item.pasos; track paso) {
+                    <li>{{ paso }}</li>
+                  }
+                </ol>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

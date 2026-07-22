@@ -1,0 +1,138 @@
+@use '../../../assets/styles/variables' as vars;
+
+$primary: #1b3c6f;
+
+.como-validar-section {
+  background-color: vars.$white;
+  padding: 40px 0 48px;
+}
+
+.como-validar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.como-validar-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.como-validar-card {
+  position: relative;
+  display: block;
+  max-width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  text-decoration: none;
+  line-height: 0;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.25s ease;
+
+  &:hover,
+  &:focus,
+  &:focus-visible,
+  &:active {
+    background: transparent;
+    text-decoration: none;
+    transform: translateY(-5px);
+    box-shadow: none;
+  }
+
+  &:hover .como-validar-card-image,
+  &:focus-visible .como-validar-card-image {
+    opacity: 1;
+    filter: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 3px;
+  }
+}
+
+.como-validar-card-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 332px;
+  object-fit: contain;
+  object-position: center;
+  transition: none;
+}
+
+.como-validar-card-label {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  width: 85%;
+  padding: 1.75rem 3% 1.75rem 8%;
+  font-family: vars.$font-family-bold;
+  font-size: clamp(1.65rem, 2.9vw, 2.15rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  text-align: left;
+  pointer-events: none;
+}
+
+.como-validar-card--clara .como-validar-card-label {
+  color: $primary;
+}
+
+.como-validar-card--azul .como-validar-card-label {
+  color: vars.$white;
+}
+
+@media (max-width: vars.$tablet) {
+  .como-validar-section {
+    padding: 28px 0 36px;
+  }
+
+  .como-validar-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .como-validar-card {
+    border-radius: 22px;
+  }
+
+  .como-validar-card-image {
+    max-height: 390px;
+  }
+
+  .como-validar-card-label {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.5rem 24px 1.5rem 22px;
+    font-size: clamp(1.55rem, 4.2vw, 2rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+}
+
+@media (max-width: vars.$mobile) {
+  .como-validar-inner {
+    max-width: 100%;
+  }
+
+  .como-validar-card-image {
+    max-height: 221px;
+  }
+
+  .como-validar-card-label {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.15rem 32px 1.15rem 24px;
+    font-size: clamp(1.3rem, 4.8vw, 1.6rem);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+  }
+}

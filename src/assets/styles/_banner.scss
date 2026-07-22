@@ -66,6 +66,8 @@ $banner-bg: #f4f4f4;
   font-size: 0.95rem;
   line-height: 1.55;
   color: $banner-text;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .banner-list {
@@ -75,6 +77,8 @@ $banner-bg: #f4f4f4;
   font-size: 0.95rem;
   line-height: 1.55;
   color: $banner-text;
+  text-align: left;
+  list-style-position: outside;
 
   li {
     margin-bottom: 4px;
@@ -176,6 +180,11 @@ $banner-bg: #f4f4f4;
 
   .banner-text {
     text-align: center;
+  }
+
+  .banner-paragraph {
+    text-align: justify;
+    text-justify: inter-word;
   }
 
   .banner-list {

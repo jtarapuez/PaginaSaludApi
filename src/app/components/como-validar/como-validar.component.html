@@ -1,0 +1,25 @@
+<section id="comoValidarCertificado" class="como-validar-section separadormenu">
+  <div class="custom-container-interno como-validar-inner fade-in-up">
+    <div class="como-validar-grid">
+      @for (tarjeta of tarjetas; track tarjeta.titulo) {
+        <a
+          class="como-validar-card como-validar-card--{{ tarjeta.variante }} fade-in-scale"
+          [href]="tarjeta.enlace"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            [src]="tarjeta.imagen"
+            alt=""
+            class="como-validar-card-image"
+            width="540"
+            height="220"
+            loading="lazy"
+            aria-hidden="true"
+          >
+          <span class="como-validar-card-label">{{ tarjeta.titulo }}</span>
+        </a>
+      }
+    </div>
+  </div>
+</section>

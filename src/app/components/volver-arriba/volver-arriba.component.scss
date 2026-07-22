@@ -1,0 +1,48 @@
+@use '../../../assets/styles/variables' as vars;
+
+$primary: #1b3c6f;
+
+.volver-arriba-btn {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1050;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border: 0;
+  border-radius: 50%;
+  background-color: $primary;
+  color: vars.$white;
+  box-shadow: 0 8px 20px rgba(27, 60, 111, 0.28);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+
+  i {
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: #16406f;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(27, 60, 111, 0.34);
+  }
+
+  &:focus-visible {
+    outline: 2px solid vars.$secondary-color;
+    outline-offset: 3px;
+  }
+}
+
+@media (max-width: vars.$mobile) {
+  .volver-arriba-btn {
+    right: 0.85rem;
+    bottom: 0.85rem;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+}

@@ -1,0 +1,56 @@
+<section id="extensionCobertura" class="extension-cobertura-section separadormenu">
+  <div class="custom-container-interno extension-cobertura-inner">
+    <header class="extension-header fade-in-up">
+      <div class="extension-header-left">
+        <span class="extension-header-icon-wrap" aria-hidden="true">
+          <img
+            src="assets/images/ico_extension_cobertura.png"
+            alt=""
+            class="extension-header-icon"
+            width="38"
+            height="38"
+          >
+        </span>
+        <h2 class="extension-header-title">{{ sectionTitle }}</h2>
+      </div>
+      <div class="extension-header-separator" aria-hidden="true"></div>
+      <p class="extension-header-summary">{{ sectionSummary }}</p>
+    </header>
+
+    <div class="extension-card fade-in-scale" role="region" aria-label="Pasos para solicitar extensión de cobertura">
+      <div class="extension-card-content">
+        <ol class="extension-steps-list">
+          @for (paso of pasos; track paso.numero) {
+            <li class="extension-step-item">
+              <span class="extension-step-text">
+                @for (fragmento of paso.fragmentos; track fragmento.texto) {
+                  @if (fragmento.enlace) {
+                    <a
+                      [href]="fragmento.enlace"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="extension-step-link"
+                    >{{ fragmento.texto }}</a>
+                  } @else {
+                    {{ fragmento.texto }}
+                  }
+                }
+              </span>
+            </li>
+          }
+        </ol>
+      </div>
+
+      <div class="extension-card-image-wrap">
+        <img
+          src="assets/images/ico_computadora.png"
+          alt="Ilustración de trámite en línea del IESS"
+          class="extension-card-image"
+          width="420"
+          height="420"
+          loading="lazy"
+        >
+      </div>
+    </div>
+  </div>
+</section>

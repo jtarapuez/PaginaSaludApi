@@ -1,0 +1,69 @@
+<section id="subsidiosMonetarios" class="subsidios-monetarios-section separadormenu">
+  <div class="custom-container-interno subsidios-monetarios-inner">
+    <header class="subsidios-header fade-in-up">
+      <div class="subsidios-header-left">
+        <span class="subsidios-header-icon-wrap" aria-hidden="true">
+          <img
+            src="assets/images/ico_subsidios_monetarios.png"
+            alt=""
+            class="subsidios-header-icon"
+            width="38"
+            height="38"
+          >
+        </span>
+        <h2 class="subsidios-header-title">{{ sectionTitle }}</h2>
+      </div>
+    </header>
+
+    <div class="subsidios-card fade-in-scale" role="region" aria-label="Subsidios monetarios del IESS">
+      <div class="subsidios-card-image-wrap">
+        <img
+          src="assets/images/img_subsidios_monetarios.png"
+          alt="Ilustración de subsidios monetarios del IESS"
+          class="subsidios-card-image"
+          width="420"
+          height="420"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="subsidios-card-content">
+        <div class="subsidios-intro">
+          @for (paragraph of introParagraphs; track paragraph) {
+            <p class="subsidios-intro-text">{{ paragraph }}</p>
+          }
+        </div>
+
+        <div class="subsidios-accordion">
+          <h3 class="visually-hidden">{{ accordionTitle }}</h3>
+          <button
+            type="button"
+            class="subsidios-accordion-trigger"
+            [attr.aria-expanded]="accordionAbierto"
+            [attr.aria-controls]="'subsidios-accordion-panel'"
+            id="subsidios-accordion-trigger"
+            (click)="toggleAccordion()"
+          >
+            <span class="subsidios-accordion-title">{{ accordionTitle }}</span>
+            <i class="fas fa-chevron-down subsidios-accordion-icon" [class.is-open]="accordionAbierto" aria-hidden="true"></i>
+          </button>
+
+          <div
+            id="subsidios-accordion-panel"
+            class="subsidios-accordion-panel"
+            role="region"
+            [attr.aria-labelledby]="'subsidios-accordion-trigger'"
+            [class.is-open]="accordionAbierto"
+            [hidden]="!accordionAbierto"
+          >
+            <ul class="subsidios-tipos-list">
+              @for (tipo of tiposSubsidio; track tipo) {
+                <li class="subsidios-tipo-item">{{ tipo }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,29 +1,62 @@
 <nav class="navbar navbar-expand-lg custom-navbar position-fixed w-100" style="z-index:1000;">
   <div class="container d-flex align-items-center">
-    <a href="https://www.iess.gob.ec/" class="navbar-brand" target="blank">
-      <img src="assets/images/logo.png" alt="Logo" height="80">
+    <a href="https://www.iess.gob.ec/" class="navbar-brand" target="_blank" rel="noopener noreferrer">
+      <img src="assets/images/logo.png" alt="Logo IESS" height="80">
     </a>
-    <button class="navbar-toggler custom-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <button
+      class="navbar-toggler custom-toggler ms-auto"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Abrir menú de navegación"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-5">
-        <li class="nav-item"><a class="nav-link" href="#inicioPagina">INICIO</a></li>
-        <li class="nav-item"><a class="nav-link" href="#servicios">SERVICIO EN LÍNEA</a></li>
+      <ul class="navbar-nav navbar-nav-salud">
+        <li class="nav-item">
+          <a class="nav-link" href="#inicioPagina">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#video">Video tutoriales</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#queCubreSeguro">Cobertura</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#titulo-mapa">Unidades médicas</a>
+        </li>
         <li class="nav-item dropdown">
-          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            MODALIDADES DE AFILIACIÓN
+          <a
+            class="nav-link dropdown-toggle"
+            href="#subsidiosMonetarios"
+            id="navbarSubsidiosDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Subsidios
           </a>
-          <ul class="submenu dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#jovenVoluntario">AFILIADO JOVEN</a></li>
-            <li><a class="dropdown-item" href="#voluntarioIndependiente">AFILIADO VOLUNTARIO</a></li>
-            <li><a class="dropdown-item" href="#gestoresCulturales">GESTORES CULTURALES</a></li>
-            <li><a class="dropdown-item" href="#trabajoNoRemuneradoHogar">TRABAJO NO REMUNERADO HOGAR</a></li>
-            <li><a class="dropdown-item" href="#voluntarioExterior">AFILIADO EXTERIOR</a></li>
+          <ul class="submenu dropdown-menu" aria-labelledby="navbarSubsidiosDropdown">
+            <li>
+              <a class="dropdown-item" href="#subsidiosMonetarios">Subsidios monetarios</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#requisitosSubsidio">Requisitos</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#comoValidarCertificado">Validar certificado</a>
+            </li>
           </ul>
         </li>
-        <li class="nav-item"><a class="nav-link" href="#video">VIDEO TUTORIALES</a></li>
-        <li class="nav-item"><a class="nav-link" href="#preguntasFrecuentes">PREGUNTAS FRECUENTES</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="#extensionCobertura">Extensión de cobertura</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#preguntasFrecuentes">Preguntas frecuentes</a>
+        </li>
       </ul>
     </div>
   </div>

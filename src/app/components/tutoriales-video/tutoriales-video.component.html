@@ -35,13 +35,12 @@
                       [attr.aria-label]="'Reproducir video: ' + video.title"
                     >
                       <div class="tutorial-thumbnail">
-                        <img [src]="thumbnailUrl" [alt]="video.title" loading="lazy">
+                        <img [src]="video.thumbnail" [alt]="video.title" loading="lazy">
                         <span class="tutorial-play" aria-hidden="true"></span>
                         <span class="tutorial-duration">{{ video.duration }}</span>
                       </div>
                       <div class="tutorial-card-body">
                         <h3 class="tutorial-card-title">{{ video.title }}</h3>
-                        <p class="tutorial-card-date">{{ video.date }}</p>
                       </div>
                     </button>
                   </div>
@@ -78,6 +77,8 @@
               type="button"
               data-bs-target="#tutorialesVideoCarousel"
               [attr.data-bs-slide-to]="indicatorIndex"
+              [class.active]="indicatorIndex === activeSlideIndex"
+              [attr.aria-current]="indicatorIndex === activeSlideIndex ? 'true' : null"
               [attr.aria-label]="'Ir al grupo de videos ' + (indicatorIndex + 1)"
             ></button>
           }

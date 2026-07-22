@@ -1,0 +1,177 @@
+@use '../../../assets/styles/variables' as vars;
+
+$primary: #1b3c6f;
+
+.requisitos-section {
+  background-color: vars.$white;
+  padding: 40px 0 48px;
+}
+
+.requisitos-inner {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.requisitos-banner-desktop {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.requisitos-banner-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.requisitos-banner-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 56%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+  padding: 2rem 2.5rem 2rem 1.75rem;
+  text-align: left;
+  color: vars.$white;
+  pointer-events: none;
+}
+
+.requisitos-banner-heading-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.requisitos-banner-heading-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 3.35rem;
+  height: 3.35rem;
+  border: 2px solid vars.$white;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.requisitos-banner-heading-icon {
+  width: 1.85rem;
+  height: 1.85rem;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.requisitos-banner-heading {
+  margin: 0;
+  font-family: vars.$font-family-bold;
+  font-size: clamp(1.05rem, 1.45vw, 1.35rem);
+  line-height: 1.3;
+  color: vars.$white;
+}
+
+.requisitos-banner-list {
+  margin: 0;
+  padding: 0 0 0 1.15rem;
+  list-style: disc;
+  list-style-position: outside;
+  text-align: left;
+
+  li {
+    margin-bottom: 0.65rem;
+    font-family: vars.$font-family-regular;
+    font-size: clamp(0.78rem, 1vw, 0.92rem);
+    line-height: 1.4;
+    color: vars.$white;
+    text-align: left;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.requisitos-banner-mobile {
+  display: none;
+}
+
+@media (max-width: vars.$tablet) {
+  .requisitos-section {
+    padding: 28px 0 36px;
+  }
+
+  .requisitos-banner-desktop {
+    display: none;
+  }
+
+  .requisitos-banner-mobile {
+    display: block;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .requisitos-banner-card {
+    background-color: $primary;
+    border-radius: 24px;
+    padding: 1.75rem 1.35rem 1.5rem;
+    color: vars.$white;
+    text-align: left;
+  }
+
+  .requisitos-banner-mobile .requisitos-banner-heading-row {
+    margin-bottom: 1.15rem;
+  }
+
+  .requisitos-banner-mobile .requisitos-banner-list {
+    margin: 0;
+    padding: 0 0 0 1.1rem;
+
+    li {
+      margin-bottom: 0;
+      padding: 0.7rem 0;
+      font-size: 0.88rem;
+      line-height: 1.4;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.45);
+
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      &:first-child {
+        padding-top: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: vars.$mobile) {
+  .requisitos-banner-card {
+    padding: 1.5rem 1.15rem 1.25rem;
+    border-radius: 20px;
+  }
+
+  .requisitos-banner-heading-icon-wrap {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .requisitos-banner-heading-icon {
+    width: 1.65rem;
+    height: 1.65rem;
+  }
+
+  .requisitos-banner-mobile .requisitos-banner-list li {
+    font-size: 0.82rem;
+    padding: 0.6rem 0;
+  }
+}

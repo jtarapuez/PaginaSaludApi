@@ -33,41 +33,40 @@ export class TutorialesVideoComponent implements OnInit, AfterViewInit, OnDestro
   private modalInstance: { show(): void; hide(): void } | null = null;
   private modalHiddenHandler: (() => void) | null = null;
   private carouselSlidHandler: ((event: Event) => void) | null = null;
+  private carouselSlideHandler: ((event: Event) => void) | null = null;
   private resizeTimeout: ReturnType<typeof setTimeout> | null = null;
   private carouselSyncTimeout: ReturnType<typeof setTimeout> | null = null;
-
-  readonly thumbnailUrl = 'assets/images/img_tutorial.png';
 
   readonly videos: TutorialVideo[] = [
     {
       youtubeId: 'tmJ0BGVRAe0',
-      title: 'Paso Afiliación Voluntaria en el extranjero-Video Tutorial',
-      duration: '12:40',
-      date: '7 de junio de 2024'
+      title: 'Agendamiento de citas médicas',
+      duration: '1:01',
+      thumbnail: 'assets/images/videos/video_agendar_citas.png'
     },
     {
       youtubeId: 'aBXgGkGseMs',
-      title: 'Prestaciones y servicios de la Afiliación Voluntaria en el exterior-Video Tutorial',
-      duration: '11:21',
-      date: '5 de junio de 2024'
+      title: 'Cancelar citas médicas',
+      duration: '0:51',
+      thumbnail: 'assets/images/videos/video_cancelar_cita.png'
     },
     {
       youtubeId: 'zXJps4O9ciM',
-      title: 'Recuperación y Generación de Clave-Video Tutorial',
-      duration: '21:02',
-      date: '2 de junio de 2024'
+      title: 'Reagendamiento citas médicas',
+      duration: '0:55',
+      thumbnail: 'assets/images/videos/video_regeandar.png'
     },
     {
       youtubeId: 'LDMPAy5jnBo',
-      title: 'Agendamiento de citas médicas-Video Tutorial',
-      duration: '10:15',
-      date: '1 de junio de 2024'
+      title: 'Registro de datos',
+      duration: '0:58',
+      thumbnail: 'assets/images/videos/video_registro_datos.png'
     },
     {
       youtubeId: 'G1pidASs1Sk',
-      title: 'Actualización de datos-Video Tutorial',
-      duration: '09:48',
-      date: '31 de mayo de 2024'
+      title: 'Actualización de datos',
+      duration: '1:21',
+      thumbnail: 'assets/images/videos/video_actualizar_datos.png'
     }
   ];
 
@@ -209,17 +208,34 @@ export class TutorialesVideoComponent implements OnInit, AfterViewInit, OnDestro
       return;
     }
 
+    this.carouselSlideHandler = (event: Event) => {
+      const carouselEvent = event as BootstrapCarouselEvent;
+      this.activeSlideIndex = carouselEvent.to;
+      this.cdr.markForCheck();
+    };
+
     this.carouselSlidHandler = (event: Event) => {
       const carouselEvent = event as BootstrapCarouselEvent;
       this.activeSlideIndex = carouselEvent.to;
+      this.cdr.markForCheck();
     };
 
+    carouselElement.addEventListener('slide.bs.carousel', this.carouselSlideHandler);
     carouselElement.addEventListener('slid.bs.carousel', this.carouselSlidHandler);
   }
 
   private unbindCarouselEvents(): void {
     const carouselElement = document.getElementById('tutorialesVideoCarousel');
-    if (carouselElement && this.carouselSlidHandler) {
+    if (!carouselElement) {
+      return;
+    }
+
+    if (this.carouselSlideHandler) {
+      carouselElement.removeEventListener('slide.bs.carousel', this.carouselSlideHandler);
+      this.carouselSlideHandler = null;
+    }
+
+    if (this.carouselSlidHandler) {
       carouselElement.removeEventListener('slid.bs.carousel', this.carouselSlidHandler);
       this.carouselSlidHandler = null;
     }

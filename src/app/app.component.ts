@@ -6,6 +6,12 @@ import { TutorialesVideoComponent } from './components/tutoriales-video/tutorial
 import { CoberturaSeguroComponent } from './components/cobertura-seguro/cobertura-seguro.component';
 import { UnidadesMedicasComponent } from './components/unidades-medicas/unidades-medicas.component';
 import { MapaUbicacionesComponent } from './components/mapa-ubicaciones/mapa-ubicaciones.component';
+import { SubsidiosMonetariosComponent } from './components/subsidios-monetarios/subsidios-monetarios.component';
+import { RequisitosSubsidioComponent } from './components/requisitos-subsidio/requisitos-subsidio.component';
+import { ExtensionCoberturaComponent } from './components/extension-cobertura/extension-cobertura.component';
+import { PreguntasFrecuentesComponent } from './components/preguntas-frecuentes/preguntas-frecuentes.component';
+import { VolverArribaComponent } from './components/volver-arriba/volver-arriba.component';
+import { ComoValidarComponent } from './components/como-validar/como-validar.component';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +22,13 @@ import { MapaUbicacionesComponent } from './components/mapa-ubicaciones/mapa-ubi
     TutorialesVideoComponent,
     CoberturaSeguroComponent,
     UnidadesMedicasComponent,
-    MapaUbicacionesComponent
+    MapaUbicacionesComponent,
+    SubsidiosMonetariosComponent,
+    RequisitosSubsidioComponent,
+    ComoValidarComponent,
+    ExtensionCoberturaComponent,
+    PreguntasFrecuentesComponent,
+    VolverArribaComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

@@ -1,0 +1,58 @@
+<section id="requisitosSubsidio" class="requisitos-section separadormenu">
+  <div class="custom-container-interno requisitos-inner">
+    <!-- PC: imagen completa + texto superpuesto a la derecha -->
+    <div class="requisitos-banner-desktop fade-in-scale" role="region" aria-label="Requisitos para subsidios">
+      <img
+        src="assets/images/img_requisitos.png"
+        alt=""
+        class="requisitos-banner-image img-fluid"
+        width="1200"
+        height="420"
+        loading="lazy"
+        aria-hidden="true"
+      >
+      <div class="requisitos-banner-overlay">
+        <div class="requisitos-banner-heading-row">
+          <span class="requisitos-banner-heading-icon-wrap" aria-hidden="true">
+            <img
+              src="assets/images/ico_requisitos.png"
+              alt=""
+              class="requisitos-banner-heading-icon"
+              width="32"
+              height="32"
+            >
+          </span>
+          <h2 class="requisitos-banner-heading">{{ sectionTitle }}</h2>
+        </div>
+        <ul class="requisitos-banner-list">
+          @for (item of requisitos; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- Móvil: tarjeta azul con viñetas -->
+    <div class="requisitos-banner-mobile fade-in-scale" role="region" aria-label="Requisitos para subsidios">
+      <div class="requisitos-banner-card">
+        <div class="requisitos-banner-heading-row">
+          <span class="requisitos-banner-heading-icon-wrap" aria-hidden="true">
+            <img
+              src="assets/images/ico_requisitos.png"
+              alt=""
+              class="requisitos-banner-heading-icon"
+              width="32"
+              height="32"
+            >
+          </span>
+          <h2 class="requisitos-banner-heading">{{ sectionTitle }}</h2>
+        </div>
+        <ul class="requisitos-banner-list">
+          @for (item of requisitos; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

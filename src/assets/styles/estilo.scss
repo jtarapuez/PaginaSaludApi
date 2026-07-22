@@ -143,33 +143,70 @@ margin-top:200px
 
   .navbar-nav {
     margin-left: 100px;
+    align-items: center;
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     .nav-link {
       color: #3F3E3E;
-      position: relative;
       transition: color 0.3s ease-in-out;
       font-family: 'PoppinsR';
       font-size: 0.9em;
-      padding-left: 50px;
-      line-height: 16px;
-      text-align: left !important;
-      align-items: center;
+      padding: 0 0.85rem;
+      line-height: 1.25;
+      text-align: center !important;
+      text-transform: none;
 
-      &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -3px;
-        width: 0;
-        height: 3px;
-        background-color: var(--secondary-color);
-        transition: width 0.3s ease-in-out;
+      &:not(.dropdown-toggle) {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+
+        &::after {
+          content: "";
+          display: block;
+          width: 0;
+          height: 3px;
+          margin-top: 4px;
+          background-color: var(--secondary-color);
+          transition: width 0.3s ease-in-out;
+        }
+
+        &:hover {
+          color: var(--secondary-color);
+
+          &::after {
+            width: 100%;
+          }
+        }
       }
 
-      &:hover {
-        color: var(--secondary-color);
+      &.dropdown-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
         &::after {
-          width: 100%;
+          display: inline-block;
+          margin-left: 0.35rem;
+          vertical-align: 0.15em;
+          content: "";
+          border-top: 0.3em solid;
+          border-right: 0.3em solid transparent;
+          border-bottom: 0;
+          border-left: 0.3em solid transparent;
+          width: auto;
+          height: auto;
+          background: none;
+          transition: none;
+        }
+
+        &:hover {
+          color: var(--secondary-color);
         }
       }
     }
@@ -211,6 +248,7 @@ margin-top:200px
   color: #6e757c;
   font-size: 0.9em;
   padding-left: 30px;
+  text-transform: none;
 }
 
 .submenu .dropdown-item:hover {

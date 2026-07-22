@@ -138,19 +138,12 @@ $tutorial-bg: #f4f4f4;
 }
 
 .tutorial-card-title {
-  margin: 0 0 8px;
+  margin: 0;
   font-family: vars.$font-family-semibold;
   font-size: 1rem;
   line-height: 1.4;
   color: #222;
   min-height: 2.8rem;
-}
-
-.tutorial-card-date {
-  margin: 0;
-  font-family: vars.$font-family-regular;
-  font-size: 0.9rem;
-  color: #666;
 }
 
 .tutorial-carousel-control {
@@ -190,19 +183,28 @@ $tutorial-bg: #f4f4f4;
 
 .tutorial-carousel-indicators {
   position: relative;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  z-index: auto;
+  display: flex;
+  justify-content: center;
   margin: 18px 0 0;
 
   [type='button'] {
     width: 12px;
     height: 12px;
     margin: 0 5px;
+    padding: 0;
     border: 1px solid #333;
     border-radius: 50%;
     background-color: transparent;
     opacity: 1;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
 
     &.active {
       background-color: #222;
+      border-color: #222;
     }
   }
 }

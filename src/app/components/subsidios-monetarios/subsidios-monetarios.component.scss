@@ -1,0 +1,226 @@
+@use '../../../assets/styles/variables' as vars;
+
+$primary: #1b3c6f;
+$text-color: #3f3e3e;
+$card-bg: #f4f4f4;
+
+.subsidios-monetarios-section {
+  background-color: vars.$white;
+  padding: 40px 0 48px;
+}
+
+.subsidios-monetarios-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.subsidios-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.subsidios-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.subsidios-header-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 3.75rem;
+  height: 3.75rem;
+  border: 2px solid $primary;
+  border-radius: 50%;
+}
+
+.subsidios-header-icon {
+  width: 2.35rem;
+  height: 2.35rem;
+  object-fit: contain;
+}
+
+.subsidios-header-title {
+  margin: 0;
+  font-family: vars.$font-family-bold;
+  font-size: clamp(1.05rem, 1.6vw, 1.45rem);
+  line-height: 1.3;
+  color: $text-color;
+  text-align: left;
+}
+
+.subsidios-card {
+  display: grid;
+  grid-template-columns: minmax(240px, 42%) 1fr;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 2.25rem;
+  background-color: $card-bg;
+  border: 1px solid #e8e8e8;
+  border-radius: 28px;
+}
+
+.subsidios-card-image-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subsidios-card-image {
+  display: block;
+  width: min(100%, 360px);
+  height: auto;
+  object-fit: contain;
+}
+
+.subsidios-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+  min-width: 0;
+  text-align: left;
+}
+
+.subsidios-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.subsidios-intro-text {
+  margin: 0;
+  font-family: vars.$font-family-regular;
+  font-size: clamp(0.88rem, 1.05vw, 0.98rem);
+  line-height: 1.55;
+  color: $text-color;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.subsidios-accordion {
+  width: 100%;
+}
+
+.subsidios-accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.1rem 0;
+  border: 0;
+  border-top: 1px solid #c9ced6;
+  border-bottom: 1px solid #c9ced6;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.subsidios-accordion-title {
+  font-family: vars.$font-family-bold;
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  line-height: 1.35;
+  color: $text-color;
+}
+
+.subsidios-accordion-icon {
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  color: $primary;
+  transition: transform 0.3s ease;
+
+  &.is-open {
+    transform: rotate(180deg);
+  }
+}
+
+.subsidios-accordion-panel {
+  overflow: hidden;
+  text-align: left;
+
+  &.is-open {
+    animation: subsidios-panel-open 0.3s ease;
+  }
+}
+
+@keyframes subsidios-panel-open {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.subsidios-tipos-list {
+  margin: 0;
+  padding: 0.75rem 0 0.25rem 1.25rem;
+  list-style: disc;
+  list-style-position: outside;
+  text-align: left;
+}
+
+.subsidios-tipo-item {
+  padding: 0.35rem 0;
+  font-family: vars.$font-family-regular;
+  font-size: clamp(0.86rem, 1vw, 0.95rem);
+  line-height: 1.45;
+  color: $text-color;
+  text-align: left;
+}
+
+@media (max-width: vars.$tablet) {
+  .subsidios-monetarios-section {
+    padding: 28px 0 36px;
+  }
+
+  .subsidios-card {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.5rem 1.25rem;
+    border-radius: 22px;
+  }
+
+  .subsidios-card-image {
+    width: min(100%, 280px);
+    margin: 0 auto;
+  }
+
+  .subsidios-header-left {
+    gap: 10px;
+  }
+
+  .subsidios-header-icon-wrap {
+    width: 3.35rem;
+    height: 3.35rem;
+  }
+
+  .subsidios-header-icon {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+}
+
+@media (max-width: vars.$mobile) {
+  .subsidios-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .subsidios-accordion-trigger {
+    padding: 0.95rem 0;
+  }
+}

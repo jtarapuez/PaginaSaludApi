@@ -1,0 +1,229 @@
+@use '../../../assets/styles/variables' as vars;
+
+$primary: #1b3c6f;
+$text-color: #3f3e3e;
+$card-bg: #f4f4f4;
+
+.extension-cobertura-section {
+  background-color: vars.$white;
+  padding: 40px 0 48px;
+}
+
+.extension-cobertura-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  text-align: left;
+}
+
+.extension-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 0;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.extension-header-left {
+  display: flex;
+  align-items: center;
+  flex: 0 1 auto;
+  gap: 14px;
+  min-width: 0;
+}
+
+.extension-header-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 3.75rem;
+  height: 3.75rem;
+  border: 2px solid $primary;
+  border-radius: 50%;
+}
+
+.extension-header-icon {
+  width: 2.35rem;
+  height: 2.35rem;
+  object-fit: contain;
+}
+
+.extension-header-title {
+  margin: 0;
+  font-family: vars.$font-family-bold;
+  font-size: clamp(1.05rem, 1.6vw, 1.45rem);
+  line-height: 1.15;
+  color: $text-color;
+  max-width: 22rem;
+  text-align: left;
+}
+
+.extension-header-separator {
+  width: 2px;
+  align-self: stretch;
+  min-height: 3.75rem;
+  max-height: 4rem;
+  background-color: $primary;
+  margin: 0 20px;
+  flex-shrink: 0;
+}
+
+.extension-header-summary {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  max-width: none;
+  font-family: vars.$font-family-regular;
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: $text-color;
+  text-align: left;
+}
+
+.extension-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(200px, 0.85fr);
+  align-items: center;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 2.25rem;
+  background-color: $card-bg;
+  border: 1px solid #d8dde3;
+  border-radius: 28px;
+}
+
+.extension-card-content {
+  width: 100%;
+  min-width: 0;
+  text-align: left;
+}
+
+.extension-steps-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: extension-step;
+  width: 100%;
+}
+
+.extension-step-item {
+  display: flex;
+  gap: 0.35rem;
+  width: 100%;
+  padding: 0.28rem 0;
+  font-family: vars.$font-family-regular;
+  font-size: clamp(0.86rem, 1.05vw, 0.96rem);
+  line-height: 1.3;
+  color: $text-color;
+  text-align: left;
+
+  &::before {
+    counter-increment: extension-step;
+    content: counter(extension-step) '.';
+    flex-shrink: 0;
+    font-family: vars.$font-family-semibold;
+    color: $text-color;
+  }
+}
+
+.extension-step-text {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+}
+
+.extension-step-link {
+  font-family: vars.$font-family-bold;
+  color: $text-color;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    color: $primary;
+    text-decoration: underline;
+  }
+}
+
+.extension-card-image-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.extension-card-image {
+  display: block;
+  width: min(100%, 320px);
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: vars.$tablet) {
+  .extension-cobertura-section {
+    padding: 28px 0 36px;
+  }
+
+  .extension-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .extension-header-left {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .extension-header-icon-wrap {
+    width: 3.35rem;
+    height: 3.35rem;
+  }
+
+  .extension-header-icon {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+
+  .extension-header-title {
+    max-width: none;
+  }
+
+  .extension-header-separator {
+    display: none;
+  }
+
+  .extension-header-summary {
+    flex: none;
+    width: 100%;
+    max-width: none;
+  }
+
+  .extension-card {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.5rem 1.25rem;
+    border-radius: 22px;
+  }
+
+  .extension-card-image {
+    width: min(100%, 260px);
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: vars.$mobile) {
+  .extension-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .extension-step-item {
+    padding: 0.35rem 0;
+    font-size: 0.84rem;
+  }
+}
