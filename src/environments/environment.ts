@@ -20,7 +20,6 @@ export const environment = {
   },
   
   unidadesMedicasDataUrl: `${apiUrl}/unidades-medicas`,
-  unidadesMedicasFallbackUrl: 'assets/data/unidades-medicas.json',
 
   geocoding: {
     nominatimUrl: 'https://nominatim.openstreetmap.org/search',

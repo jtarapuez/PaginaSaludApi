@@ -27,9 +27,19 @@
       <span class="ubicacion-badge ubicacion-badge--gps" *ngIf="origenUbicacion === 'gps' && userLocation">
         Ubicación del celular activa
       </span>
-      <span class="ubicacion-badge ubicacion-badge--destino" *ngIf="unidadDestinoActiva">
-        Destino: {{ unidadDestinoActiva.siglas }}
-      </span>
+      <div class="ruta-movil-info" *ngIf="esDispositivoMovil && infoRutaMovil">
+        <div class="ruta-movil-info__content">
+          <i class="fas fa-route"></i>
+          <div>
+            <strong>Hacia {{ infoRutaMovil.destino }}</strong>
+            <span>{{ infoRutaMovil.distancia }}<ng-container *ngIf="infoRutaMovil.duracion"> · {{ infoRutaMovil.duracion }}</ng-container></span>
+            <small *ngIf="infoRutaMovil.aproximada">Distancia aproximada en línea recta</small>
+          </div>
+        </div>
+        <button type="button" class="ruta-movil-info__cerrar" (click)="cerrarInfoRuta()" aria-label="Cerrar ruta">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -147,10 +157,10 @@
                   <a class="action-btn web" *ngIf="unidad.sitio_web" [href]="unidad.sitio_web" target="_blank" title="Visitar sitio web">
                     <i class="fas fa-globe"></i>
                   </a>
-                  <button class="action-btn map" (click)="centrarEnUnidad(unidad.latitud, unidad.longitud, unidad.nombre, unidad)" title="Ver en mapa">
+                  <button class="action-btn map" (click)="centrarEnUnidad(unidad.latitud, unidad.longitud, unidad.nombre, unidad, true)" title="Ver en mapa">
                     <i class="fas fa-map-marker-alt"></i>
                   </button>
-                  <button class="action-btn route" (click)="mostrarRuta(unidad.latitud, unidad.longitud, unidad)" title="Ver en Google Maps">
+                  <button class="action-btn route" (click)="mostrarRuta(unidad.latitud, unidad.longitud, unidad)" [title]="esDispositivoMovil ? 'Ver ruta y distancia' : 'Ver en Google Maps'">
                     <i class="fas fa-route"></i>
                   </button>
                 </div>

@@ -60,6 +60,7 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
 
   esDispositivoMovil = false;
   unidadDestinoActiva: UnidadMedica | null = null;
+  infoRutaMovil: { destino: string; distancia: string; duracion?: string; aproximada?: boolean } | null = null;
   mostrarModalGoogleMaps = false;
   private destinoGoogleMapsPendiente: { lat: number; lng: number; usarRuta: boolean } | null = null;
 
@@ -477,12 +478,13 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
   private aplicarUbicacionUsuario(lat: number, lng: number): void {
     this.userLocation = { lat, lng };
     this.ejecutarCuandoMapaListo(() => {
-      this.mostrarUbicacionUsuarioEnMapa();
+      const hayRutaPendiente = !!this.destinoPendiente;
+      this.mostrarUbicacionUsuarioEnMapa(!hayRutaPendiente);
       this.actualizarMarcadoresConDistancia();
       if (this.destinoPendiente) {
         const destino = this.destinoPendiente;
         this.destinoPendiente = null;
-        this.dibujarRutaEnMapa(destino.lat, destino.lng);
+        void this.dibujarRutaEnMapa(destino.lat, destino.lng, this.unidadDestinoActiva ?? undefined);
       }
     });
   }
@@ -506,7 +508,7 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     }, 100);
   }
 
-  mostrarUbicacionUsuarioEnMapa(): void {
+  mostrarUbicacionUsuarioEnMapa(abrirPopup = true): void {
     if (!this.map || !this.userLocation) return;
 
     // Remover marcador anterior si existe
@@ -544,7 +546,11 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
         <small>Lng: ${this.userLocation.lng.toFixed(6)}</small>
         ${notaUbicacion}
       </div>
-    `).openPopup();
+    `);
+
+    if (abrirPopup) {
+      this.userLocationMarker.openPopup();
+    }
 
     // Centrar el mapa en la ubicación del usuario
     const zoom = this.origenUbicacion === 'geocoded' ? 15 : 12;
@@ -681,6 +687,8 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     this.filtroAplicado = false;
     this.provinciasFiltradas = [];
     this.errorCargaUnidades = '';
+    this.unidadDestinoActiva = null;
+    this.cerrarInfoRuta();
 
     this.provincias.forEach((provincia) => {
       this.provinciasExpandidas[provincia] = true;
@@ -734,27 +742,28 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     });
   }
 
-  centrarEnUnidad(latitud: number, longitud: number, nombre: string, unidad?: UnidadMedica): void {
-    if (unidad) {
-      this.unidadDestinoActiva = unidad;
-    } else {
-      const encontrada = this.buscarUnidadPorCoordenadas(latitud, longitud);
-      if (encontrada) {
-        this.unidadDestinoActiva = encontrada;
-      }
+  centrarEnUnidad(
+    latitud: number,
+    longitud: number,
+    nombre: string,
+    unidad?: UnidadMedica,
+    abrirPopup = false
+  ): void {
+    if (!this.map) return;
+
+    this.map.closePopup();
+    this.map.setView([latitud, longitud], 15);
+
+    if (!abrirPopup) {
+      return;
     }
 
-    if (!this.map) return;
-    
-    this.map.setView([latitud, longitud], 15);
-    
-    // Buscar el marcador correspondiente y abrir su popup
     const marcador = this.markers.find(marker => {
       const lat = marker.getLatLng().lat;
       const lng = marker.getLatLng().lng;
       return Math.abs(lat - latitud) < 0.0001 && Math.abs(lng - longitud) < 0.0001;
     });
-    
+
     if (marcador) {
       marcador.openPopup();
     }
@@ -771,7 +780,35 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     }
 
     this.centrarEnUnidad(latitudDestino, longitudDestino, unidad?.nombre ?? '', unidad);
+
+    if (this.esDispositivoMovil) {
+      this.mostrarRutaEnMapaMovil(latitudDestino, longitudDestino, unidad);
+      return;
+    }
+
     this.mostrarInstruccionesGoogleMaps(latitudDestino, longitudDestino);
+  }
+
+  private mostrarRutaEnMapaMovil(
+    latitudDestino: number,
+    longitudDestino: number,
+    unidad?: UnidadMedica
+  ): void {
+    this.mensajeUbicacionInline = '';
+    this.map?.closePopup();
+
+    if (!this.userLocation) {
+      this.destinoPendiente = { lat: latitudDestino, lng: longitudDestino };
+      this.mensajeUbicacionInline =
+        'Pulse «Mi ubicación» para ver la distancia y la ruta en el mapa.';
+      return;
+    }
+
+    void this.dibujarRutaEnMapa(latitudDestino, longitudDestino, unidad);
+  }
+
+  cerrarInfoRuta(): void {
+    this.limpiarRuta();
   }
 
   abrirUbicacionEnGoogleMaps(): void {
@@ -838,13 +875,50 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
       this.map.removeLayer(this.rutaLayer);
       this.rutaLayer = null;
     }
+    this.infoRutaMovil = null;
   }
 
-  private async dibujarRutaEnMapa(latitudDestino: number, longitudDestino: number): Promise<void> {
+  private formatearDistancia(metros: number): string {
+    if (metros >= 1000) {
+      return `${(metros / 1000).toFixed(1)} km`;
+    }
+    return `${Math.round(metros)} m`;
+  }
+
+  private formatearDuracion(segundos: number): string {
+    const minutos = Math.max(1, Math.round(segundos / 60));
+    return `~${minutos} min`;
+  }
+
+  private actualizarInfoRutaMovil(
+    unidad: UnidadMedica | undefined,
+    distanciaMetros: number,
+    duracionSegundos?: number,
+    aproximada = false
+  ): void {
+    if (!this.esDispositivoMovil) {
+      return;
+    }
+
+    const etiquetaDestino = unidad?.siglas ?? this.unidadDestinoActiva?.siglas ?? 'Destino';
+    this.infoRutaMovil = {
+      destino: etiquetaDestino,
+      distancia: this.formatearDistancia(distanciaMetros),
+      duracion: duracionSegundos ? this.formatearDuracion(duracionSegundos) : undefined,
+      aproximada
+    };
+  }
+
+  private async dibujarRutaEnMapa(
+    latitudDestino: number,
+    longitudDestino: number,
+    unidad?: UnidadMedica
+  ): Promise<void> {
     if (!this.map || !this.userLocation) {
       return;
     }
 
+    this.map.closePopup();
     this.limpiarRuta();
 
     const origen = this.userLocation;
@@ -855,7 +929,8 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
       const datos = await respuesta.json();
 
       if (datos?.routes?.[0]?.geometry?.coordinates?.length) {
-        const coordenadas = datos.routes[0].geometry.coordinates.map(
+        const ruta = datos.routes[0];
+        const coordenadas = ruta.geometry.coordinates.map(
           (punto: number[]) => [punto[1], punto[0]] as [number, number]
         );
 
@@ -877,6 +952,7 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
               : 'Ruta sugerida';
           this.rutaLayer.bindPopup(`<strong>${etiqueta}</strong>`);
           this.map.fitBounds(this.rutaLayer.getBounds(), { padding: [40, 40] });
+          this.actualizarInfoRutaMovil(unidad, ruta.distance, ruta.duration);
         });
         return;
       }
@@ -884,10 +960,14 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
       console.warn('No se pudo obtener ruta OSRM, usando línea directa:', error);
     }
 
-    this.dibujarRutaLineaRecta(latitudDestino, longitudDestino);
+    this.dibujarRutaLineaRecta(latitudDestino, longitudDestino, unidad);
   }
 
-  private dibujarRutaLineaRecta(latitudDestino: number, longitudDestino: number): void {
+  private dibujarRutaLineaRecta(
+    latitudDestino: number,
+    longitudDestino: number,
+    unidad?: UnidadMedica
+  ): void {
     if (!this.map || !this.userLocation) {
       return;
     }
@@ -908,6 +988,14 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
 
       this.rutaLayer.bindPopup('<strong>Ruta aproximada en línea recta</strong>');
       this.map!.fitBounds(this.rutaLayer.getBounds(), { padding: [40, 40] });
+
+      const distanciaKm = this.calcularDistancia(
+        this.userLocation!.lat,
+        this.userLocation!.lng,
+        latitudDestino,
+        longitudDestino
+      );
+      this.actualizarInfoRutaMovil(unidad, distanciaKm * 1000, undefined, true);
     });
   }
 
