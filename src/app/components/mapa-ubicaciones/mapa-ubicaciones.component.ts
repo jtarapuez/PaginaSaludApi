@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, NgZone, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule } from '@angular/forms';
 import { UnidadesMedicasService } from '../../core/services/unidades-medicas.service';
@@ -73,6 +74,7 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
   private mapRevealObserver?: IntersectionObserver;
   private rutaLayer: L.Polyline | null = null;
   private mapClickUbicacionHandler?: (event: L.LeafletMouseEvent) => void;
+  private readonly destroyRef = inject(DestroyRef);
   
   // Iconos personalizados
   private userLocationIcon?: L.Icon | L.DivIcon;
@@ -138,7 +140,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     // Fix para iconos de Leaflet
     this.configurarIconosLeaflet();
     
-    this.unidadesMedicasService.getUnidadesMedicas().subscribe({
+    this.unidadesMedicasService.getUnidadesMedicas().pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
       next: (data: ProvinciaUnidades[]) => {
         this.procesarDatosIniciales(data);
       },
@@ -725,7 +729,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     this.errorCargaUnidades = '';
     this.filtroAplicado = true;
 
-    this.unidadesMedicasService.getUnidadesMedicas(this.obtenerFiltrosActivos()).subscribe({
+    this.unidadesMedicasService.getUnidadesMedicas(this.obtenerFiltrosActivos()).pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
       next: (data) => {
         this.provinciasFiltradas = data;
         this.cargandoUnidades = false;

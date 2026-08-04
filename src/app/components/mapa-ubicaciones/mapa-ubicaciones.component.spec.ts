@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MapaUbicacionesComponent } from './mapa-ubicaciones.component';
 import { UnidadesMedicasService } from '../../core/services/unidades-medicas.service';
-import { of } from 'rxjs';
+import { of, throwError, Subject } from 'rxjs';
 
 describe('MapaUbicacionesComponent', () => {
   let component: MapaUbicacionesComponent;
@@ -55,18 +55,57 @@ describe('MapaUbicacionesComponent', () => {
 
   it('should load medical units on init', () => {
     unidadesMedicasService.getUnidadesMedicas.and.returnValue(of(mockUnidadesMedicas));
-    
+
     component.ngOnInit();
-    
+
     expect(unidadesMedicasService.getUnidadesMedicas).toHaveBeenCalled();
     expect(component.provinciasUnidades).toEqual(mockUnidadesMedicas);
+    expect(component.errorCargaUnidades).toBe('');
   });
 
   it('should extract provinces from data', () => {
     unidadesMedicasService.getUnidadesMedicas.and.returnValue(of(mockUnidadesMedicas));
-    
+
     component.ngOnInit();
-    
+
     expect(component.provincias).toEqual(['Pichincha']);
   });
-}); 
+
+  it('should set errorCargaUnidades when initial API load fails', () => {
+    unidadesMedicasService.getUnidadesMedicas.and.returnValue(
+      throwError(() => new Error('network'))
+    );
+
+    component.ngOnInit();
+
+    expect(component.errorCargaUnidades).toBe('No se pudieron cargar las unidades médicas.');
+    expect(component.filtroAplicado).toBeFalse();
+  });
+
+  it('should show initial load error in the DOM without filters applied', () => {
+    unidadesMedicasService.getUnidadesMedicas.and.returnValue(
+      throwError(() => new Error('network'))
+    );
+
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    const alert = fixture.nativeElement.querySelector('.error-filtros');
+    expect(component.filtroAplicado).toBeFalse();
+    expect(alert).toBeTruthy();
+    expect(alert.textContent).toContain('No se pudieron cargar las unidades médicas.');
+  });
+
+  it('should not update state after destroy when late emission arrives', () => {
+    const late$ = new Subject<typeof mockUnidadesMedicas>();
+    unidadesMedicasService.getUnidadesMedicas.and.returnValue(late$.asObservable());
+
+    component.ngOnInit();
+    expect(component.provinciasUnidades).toEqual([]);
+
+    fixture.destroy();
+    late$.next(mockUnidadesMedicas);
+
+    expect(component.provinciasUnidades).toEqual([]);
+  });
+});

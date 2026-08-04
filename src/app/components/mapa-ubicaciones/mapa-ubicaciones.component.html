@@ -135,13 +135,18 @@
         </button>
       </div>
 
+      <!-- Error de carga inicial (visible sin filtros aplicados) -->
+      <p class="error-filtros" *ngIf="errorCargaUnidades && !filtroAplicado" role="alert">
+        {{ errorCargaUnidades }}
+      </p>
+
       <!-- Resultados en formato lista -->
       <div class="results-section" *ngIf="filtroAplicado">
         <h2>Resultados ({{ getTotalUnidades() }})</h2>
         <p class="cargando-filtros" *ngIf="cargandoUnidades">
           <i class="fas fa-spinner fa-spin"></i> Consultando API...
         </p>
-        <p class="error-filtros" *ngIf="errorCargaUnidades">{{ errorCargaUnidades }}</p>
+        <p class="error-filtros" *ngIf="errorCargaUnidades" role="alert">{{ errorCargaUnidades }}</p>
         <div class="results-list" *ngIf="!cargandoUnidades">
           <div class="result-item" *ngFor="let provincia of provinciasFiltradas">
             <div *ngFor="let unidad of provincia.unidades">
