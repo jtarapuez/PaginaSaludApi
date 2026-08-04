@@ -1,0 +1,25 @@
+# ============================================================
+#  PaginaSalud - Solo el frontend (nginx)
+#
+#  API = externa en host :8080 (BaseSpringApi local o Docker).
+#  Nginx hace proxy de /api → host.docker.internal:8080
+#
+#  Uso:
+#    docker-compose up -d --build
+#    docker-compose logs -f
+#    docker-compose down
+# ============================================================
+
+services:
+
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pagina-salud:1.0.0
+    container_name: pagina_salud_app
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

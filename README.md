@@ -22,6 +22,7 @@ Once the server is running, open your browser and navigate to `http://localhost:
 | [AGENTS.md](AGENTS.md) | Agentes de Cursor / onboarding técnico |
 | [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md) | Arquitectura detallada del proyecto |
 | [docs/MAPA-UBICACIONES.md](docs/MAPA-UBICACIONES.md) | Mapa Leaflet, geolocalización y filtros |
+| [docs/DOCKER.md](docs/DOCKER.md) | Front en Docker (nginx + proxy API) |
 | [GUIA-AMBIENTES.md](GUIA-AMBIENTES.md) | Ambientes dev / staging / producción |
 
 ## Ambientes
@@ -37,6 +38,24 @@ ng build
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+## Docker (nginx)
+
+Front en contenedor; la API sigue en **BaseSpringApi** (`:8080` en el host). Nginx sirve el build y hace proxy de `/api` al backend.
+
+```bash
+# Requiere API en http://localhost:8080/api (Maven o docker-compose en BaseSpringApi)
+cd PaginaSalud
+docker-compose up -d --build
+```
+
+- **URL:** http://localhost:4200/
+- **Contenedor:** `pagina_salud_app`
+- **Imagen:** `pagina-salud:1.0.0`
+
+> No usar `npm start` y Docker a la vez en el puerto **4200**.
+
+Documentación detallada: [docs/DOCKER.md](docs/DOCKER.md).
 
 ## Running unit tests
 

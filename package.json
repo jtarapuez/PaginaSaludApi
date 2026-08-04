@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:docker": "ng build --configuration=docker",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:PaginaSalud": "node dist/pagina-salud/server/server.mjs"
