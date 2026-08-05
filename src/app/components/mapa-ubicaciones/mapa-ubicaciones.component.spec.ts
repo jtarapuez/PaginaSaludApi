@@ -108,4 +108,44 @@ describe('MapaUbicacionesComponent', () => {
 
     expect(component.provinciasUnidades).toEqual([]);
   });
+
+  it('should calculate distance between two coordinates', () => {
+    const distancia = component.calcularDistancia(-0.1807, -78.4678, -0.2, -78.5);
+    expect(distancia).toBeGreaterThan(0);
+    expect(distancia).toBeLessThan(50);
+  });
+
+  it('should count filtered units', () => {
+    component.provinciasFiltradas = mockUnidadesMedicas;
+    expect(component.getTotalUnidades()).toBe(1);
+  });
+
+  it('should toggle province accordion state', () => {
+    component.toggleProvincia('Pichincha');
+    expect(component.provinciasExpandidas['Pichincha']).toBeTrue();
+    component.toggleProvincia('Pichincha');
+    expect(component.provinciasExpandidas['Pichincha']).toBeFalse();
+  });
+
+  it('should reset filters on limpiarFiltros', () => {
+    unidadesMedicasService.getUnidadesMedicas.and.returnValue(of(mockUnidadesMedicas));
+    component.ngOnInit();
+    component.provinciaSeleccionada = 'Pichincha';
+    component.nivelSeleccionado = 3;
+    component.terminoBusqueda = 'hospital';
+    component.filtroAplicado = true;
+
+    component.limpiarFiltros();
+
+    expect(component.provinciaSeleccionada).toBe('');
+    expect(component.nivelSeleccionado).toBeNull();
+    expect(component.terminoBusqueda).toBe('');
+    expect(component.filtroAplicado).toBeFalse();
+  });
+
+  it('should close Google Maps modal', () => {
+    component.mostrarModalGoogleMaps = true;
+    component.cerrarModalGoogleMaps();
+    expect(component.mostrarModalGoogleMaps).toBeFalse();
+  });
 });

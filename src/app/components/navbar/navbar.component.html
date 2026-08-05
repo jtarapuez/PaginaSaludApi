@@ -36,6 +36,8 @@
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            (keydown.enter)="$event.preventDefault()"
+            (keydown.space)="$event.preventDefault()"
           >
             Subsidios
           </a>

@@ -12,7 +12,7 @@ export class UnidadesMedicasService {
   private readonly CACHE_SIZE = 1;
   private unidadesMedicasCache$: Observable<ProvinciaUnidades[]> | null = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   getUnidadesMedicas(filtros?: UnidadesMedicasFiltros): Observable<ProvinciaUnidades[]> {
     const params = this.buildParams(filtros);

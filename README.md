@@ -23,6 +23,8 @@ Once the server is running, open your browser and navigate to `http://localhost:
 | [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md) | Arquitectura detallada del proyecto |
 | [docs/MAPA-UBICACIONES.md](docs/MAPA-UBICACIONES.md) | Mapa Leaflet, geolocalización y filtros |
 | [docs/DOCKER.md](docs/DOCKER.md) | Front en Docker (nginx + proxy API) |
+| [docs/SONAR.md](docs/SONAR.md) | Análisis SonarQube (Karma + lcov) |
+| [docs/CHECKLIST_MAPA_POST_SONAR.md](docs/CHECKLIST_MAPA_POST_SONAR.md) | Validación manual del mapa tras cambios Sonar |
 | [GUIA-AMBIENTES.md](GUIA-AMBIENTES.md) | Ambientes dev / staging / producción |
 
 ## Ambientes
@@ -62,6 +64,23 @@ Documentación detallada: [docs/DOCKER.md](docs/DOCKER.md).
 ```bash
 ng test
 ```
+
+Con cobertura (requerido antes de Sonar):
+
+```bash
+npm run test:coverage
+```
+
+## SonarQube
+
+Análisis de calidad según manual IESS MAN-001 §5.2. Documentación completa: [Documentacion/SONAR_PAGINASALUD.md](../Documentacion/SONAR_PAGINASALUD.md).
+
+```bash
+export SONAR_TOKEN=tu_token   # obtener en http://192.168.111.89:9000 → My Account → Security
+npm run run-sonar             # tests + cobertura + análisis
+```
+
+Dashboard: http://192.168.111.89:9000/dashboard?id=pagina-salud
 
 ## Additional Resources
 

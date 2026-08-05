@@ -1,7 +1,6 @@
 import {
   Component,
   HostListener,
-  OnDestroy,
   OnInit,
   PLATFORM_ID,
   inject
@@ -14,7 +13,7 @@ import { isPlatformBrowser } from '@angular/common';
   templateUrl: './volver-arriba.component.html',
   styleUrl: './volver-arriba.component.scss'
 })
-export class VolverArribaComponent implements OnInit, OnDestroy {
+export class VolverArribaComponent implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
 
   visible = false;
@@ -25,10 +24,6 @@ export class VolverArribaComponent implements OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.updateVisibility();
     }
-  }
-
-  ngOnDestroy(): void {
-    // HostListener se limpia automáticamente al destruir el componente
   }
 
   @HostListener('window:scroll')

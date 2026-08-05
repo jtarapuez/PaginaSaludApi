@@ -56,8 +56,8 @@
   </div>
 
   <!-- Modal antes de abrir Google Maps -->
-  <div class="modal-ubicacion-overlay" *ngIf="mostrarModalGoogleMaps" (click)="cerrarModalGoogleMaps()">
-    <div class="modal-ubicacion" (click)="$event.stopPropagation()">
+  <div class="modal-ubicacion-overlay" *ngIf="mostrarModalGoogleMaps" (click)="cerrarModalGoogleMaps()" (keydown.escape)="cerrarModalGoogleMaps()">
+    <div class="modal-ubicacion" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
       <h3>Abrir en Google Maps</h3>
       <p class="modal-mensaje-info">
         Se abrirá Google Maps con la unidad médica marcada.
@@ -77,8 +77,8 @@
   </div>
 
   <!-- Modal solo si Chrome bloqueó el permiso para este sitio -->
-  <div class="modal-ubicacion-overlay" *ngIf="mostrarModalUbicacionPc" (click)="cerrarModalUbicacionPc()">
-    <div class="modal-ubicacion" (click)="$event.stopPropagation()">
+  <div class="modal-ubicacion-overlay" *ngIf="mostrarModalUbicacionPc" (click)="cerrarModalUbicacionPc()" (keydown.escape)="cerrarModalUbicacionPc()">
+    <div class="modal-ubicacion" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
       <h3>{{ esDispositivoMovil ? 'Ubicación del celular' : 'Permiso de ubicación bloqueado' }}</h3>
       <p class="modal-mensaje-error">{{ mensajeErrorUbicacion }}</p>
       <div class="modal-ubicacion-actions">

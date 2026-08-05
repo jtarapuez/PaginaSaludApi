@@ -8,6 +8,9 @@
     "build:docker": "ng build --configuration=docker",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:coverage": "ng test --no-watch --no-progress --browsers=ChromeHeadless --code-coverage",
+    "sonar": "sonar-scanner",
+    "run-sonar": "npm run test:coverage && npm run sonar",
     "serve:ssr:PaginaSalud": "node dist/pagina-salud/server/server.mjs"
   },
   "private": true,
@@ -44,6 +47,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "sonar-scanner": "^3.1.0",
     "typescript": "~5.7.2"
   },
   "description": "This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.",

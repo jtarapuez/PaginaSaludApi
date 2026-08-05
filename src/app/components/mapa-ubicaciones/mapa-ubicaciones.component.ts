@@ -81,8 +81,8 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
   private hospitalIcon?: L.Icon;
   
   constructor(
-    private unidadesMedicasService: UnidadesMedicasService,
-    private ngZone: NgZone
+    private readonly unidadesMedicasService: UnidadesMedicasService,
+    private readonly ngZone: NgZone
   ) {}
 
   private configurarIconosLeaflet(): void {
@@ -529,17 +529,8 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
       this.userLocationMarker.addTo(this.map);
     }
 
-    const tituloUbicacion = this.origenUbicacion === 'manual'
-      ? '📍 Ubicación indicada por usted'
-      : this.origenUbicacion === 'geocoded'
-        ? '📍 Ubicación por dirección'
-        : '📍 Tu ubicación actual';
-
-    const notaUbicacion = this.origenUbicacion === 'manual'
-      ? '<br><small style="color:#b45309;">Punto seleccionado en el mapa</small>'
-      : this.origenUbicacion === 'geocoded'
-        ? '<br><small style="color:#1d4ed8;">Obtenida por búsqueda de dirección</small>'
-        : '<br><small style="color:#15803d;">Obtenida del navegador</small>';
+    const tituloUbicacion = this.obtenerTituloUbicacion();
+    const notaUbicacion = this.obtenerNotaUbicacion();
 
     this.userLocationMarker.bindPopup(`
       <div style="text-align: center;">
@@ -951,11 +942,7 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
             opacity: 0.85
           }).addTo(this.map);
 
-          const etiqueta = this.origenUbicacion === 'manual'
-            ? 'Ruta desde punto indicado'
-            : this.origenUbicacion === 'geocoded'
-              ? 'Ruta desde dirección indicada'
-              : 'Ruta sugerida';
+          const etiqueta = this.obtenerEtiquetaRuta();
           this.rutaLayer.bindPopup(`<strong>${etiqueta}</strong>`);
           this.map.fitBounds(this.rutaLayer.getBounds(), { padding: [40, 40] });
           this.actualizarInfoRutaMovil(unidad, ruta.distance, ruta.duration);
@@ -1003,6 +990,36 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
       );
       this.actualizarInfoRutaMovil(unidad, distanciaKm * 1000, undefined, true);
     });
+  }
+
+  private obtenerTituloUbicacion(): string {
+    if (this.origenUbicacion === 'manual') {
+      return '📍 Ubicación indicada por usted';
+    }
+    if (this.origenUbicacion === 'geocoded') {
+      return '📍 Ubicación por dirección';
+    }
+    return '📍 Tu ubicación actual';
+  }
+
+  private obtenerNotaUbicacion(): string {
+    if (this.origenUbicacion === 'manual') {
+      return '<br><small style="color:#b45309;">Punto seleccionado en el mapa</small>';
+    }
+    if (this.origenUbicacion === 'geocoded') {
+      return '<br><small style="color:#1d4ed8;">Obtenida por búsqueda de dirección</small>';
+    }
+    return '<br><small style="color:#15803d;">Obtenida del navegador</small>';
+  }
+
+  private obtenerEtiquetaRuta(): string {
+    if (this.origenUbicacion === 'manual') {
+      return 'Ruta desde punto indicado';
+    }
+    if (this.origenUbicacion === 'geocoded') {
+      return 'Ruta desde dirección indicada';
+    }
+    return 'Ruta sugerida';
   }
 
   llamarUnidad(telefono: string): void {
