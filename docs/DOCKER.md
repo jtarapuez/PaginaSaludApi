@@ -57,6 +57,14 @@ docker-compose up -d --build
 docker-compose logs -f front
 ```
 
+Arranque con validación de puertos (skill del workspace):
+
+```bash
+.cursor/skills/lev-paginasalud-docker/scripts/start-docker.sh
+```
+
+Skill Cursor: **`lev-paginasalud-docker`** (pedir: “levanta el front en Docker”).
+
 ### Verificación
 
 ```bash
@@ -128,3 +136,4 @@ En servidor QA/PROD ajustar `nginx.conf` (o ingress) con la URL real del API gat
 | [README.md](../README.md) | Arranque rápido |
 | [GUIA-AMBIENTES.md](../GUIA-AMBIENTES.md) | Ambientes Angular |
 | [MAPA-UBICACIONES.md](./MAPA-UBICACIONES.md) | Mapa Leaflet y filtros |
+| Stack API+front+gateway (:8081) | `Documentacion/DOCKER_SALUD_STACK.md` (workspace Antigravity) |

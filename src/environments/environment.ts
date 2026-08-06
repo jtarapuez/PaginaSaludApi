@@ -1,5 +1,5 @@
-// Ambiente de DESARROLLO (local)
-const apiUrl = 'http://localhost:8080/api';
+// Ambiente de DESARROLLO (local y red LAN vía ng serve --host 0.0.0.0 + proxy)
+const apiUrl = '/api';
 
 export const environment = {
   production: false,

@@ -497,12 +497,20 @@
 .content-container {
   display: flex;
   gap: 0;
-  height: calc(80vh - 140px);
-  max-height: 650px;
+  height: calc(80vh - 120px);
+  min-height: 520px;
+  max-height: 720px;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
+
+  /* Laptops / desktop 1366–1920: más alto útil para ver 1 tarjeta completa */
+  @media (min-width: 1366px) and (max-width: 1920px) {
+    height: min(78vh, calc(100vh - 230px));
+    min-height: 520px;
+    max-height: 720px;
+  }
   
   @media (max-width: 768px) {
     flex-direction: column;
@@ -517,11 +525,13 @@
 .left-panel {
   width: 320px;
   min-width: 320px;
+  min-height: 0;
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   
   @media (max-width: 768px) {
     width: 100%;
@@ -532,6 +542,7 @@
 
 /* Sección de filtros */
 .filters-section {
+  flex-shrink: 0;
   padding: 20px;
   border-bottom: 1px solid #e0e0e0;
   
@@ -629,11 +640,15 @@
 
 /* Sección de resultados */
 .results-section {
-  flex: 1;
-  overflow-y: auto;
+  flex: 1 1 auto;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   padding: 20px;
   
   h2 {
+    flex-shrink: 0;
     margin: 0 0 1rem 0;
     font-size: 1.2rem;
     color: #01579b;
@@ -642,12 +657,96 @@
 
   @media (max-width: 768px) {
     padding: 15px;
+    min-height: 220px;
   }
 }
 
 .results-list {
-  max-height: 400px;
+  flex: 1 1 auto;
+  min-height: 200px;
   overflow-y: auto;
+}
+
+/* Desktop 1366–1920: compactar filtros y ampliar zona de resultados */
+@media (min-width: 1366px) and (max-width: 1920px) {
+  .mapa-container {
+    padding: 10px 0;
+  }
+
+  .mapa-toolbar-row {
+    margin-bottom: 10px;
+  }
+
+  .left-panel:has(.results-section) {
+    .filters-section {
+      padding: 10px 14px;
+
+      h2 {
+        margin-bottom: 0.6rem;
+        font-size: 1.1rem;
+      }
+    }
+
+    .filter-group {
+      margin-bottom: 8px;
+
+      label {
+        margin-bottom: 0.35rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    .select-wrapper select {
+      padding: 10px 14px;
+      font-size: 0.95rem;
+    }
+
+    .btn-limpiar {
+      padding: 9px 14px;
+      font-size: 0.9rem;
+    }
+  }
+
+  .results-section {
+    min-height: 340px;
+    padding: 12px 14px 14px;
+
+    h2 {
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  .results-list {
+    min-height: 295px;
+  }
+
+  .hospital-info {
+    padding: 11px 12px;
+    margin-bottom: 10px;
+
+    h3 {
+      font-size: 1.05rem;
+      margin-bottom: 5px;
+    }
+
+    .hospital-name,
+    .hospital-address,
+    .hospital-level {
+      margin-bottom: 5px;
+      font-size: 0.86rem;
+      line-height: 1.35;
+    }
+
+    .hospital-level {
+      margin-bottom: 8px;
+    }
+  }
+
+  .action-btn {
+    padding: 7px 10px;
+    font-size: 0.85rem;
+  }
 }
 
 .hospital-info {
