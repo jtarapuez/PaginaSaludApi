@@ -25,7 +25,7 @@ export const environment = {
 
   geocoding: {
     nominatimUrl: 'https://nominatim.openstreetmap.org/search',
-    userAgent: 'PaginaSalud-IESS/1.0',
+    userAgent: 'salud-geolocalizacion-ui-IESS/1.0',
     countryCode: 'ec'
   },
   

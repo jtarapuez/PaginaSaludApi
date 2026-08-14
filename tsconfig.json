@@ -30,7 +30,11 @@
     "src/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/main.server.ts",
+    "src/server.ts",
+    "src/app/app.config.server.ts",
+    "src/app/app.routes.server.ts"
   ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -18,7 +18,7 @@ module.exports = function (config) {
       suppressAll: true,
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/pagina-salud'),
+      dir: require('path').join(__dirname, './coverage/salud-geolocalizacion-ui'),
       subdir: '.',
       reporters: [
         { type: 'html' },

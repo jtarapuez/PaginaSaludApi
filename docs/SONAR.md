@@ -1,9 +1,9 @@
-# SonarQube — PaginaSalud
+# SonarQube — salud-geolocalizacion-ui
 
 Configuración operativa del análisis Sonar (manual IESS MAN-001 §5.2, adaptado a Angular + Karma).
 
-**Dashboard:** http://192.168.111.89:9000/dashboard?id=pagina-salud  
-**Project key:** `pagina-salud`
+**Dashboard:** http://192.168.111.89:9000/dashboard?id=salud-geolocalizacion-ui  
+**Project key:** `salud-geolocalizacion-ui`
 
 ## Ejecución
 
@@ -17,7 +17,7 @@ npm run run-sonar             # test:coverage + sonar-scanner
 | Archivo | Rol |
 |---------|-----|
 | `sonar-project.properties` | Clave proyecto, exclusiones, lcov |
-| `karma.conf.js` | Reporte `coverage/pagina-salud/lcov.info` |
+| `karma.conf.js` | Reporte `coverage/salud-geolocalizacion-ui/lcov.info` |
 | `angular.json` | `karmaConfig` + `codeCoverage` |
 
 ## Quality Gate (última validación)

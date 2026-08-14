@@ -1,7 +1,7 @@
 # ============================================================
-#  PaginaSalud - Solo el frontend (nginx)
+#  salud-geolocalizacion-ui - Solo el frontend (nginx)
 #
-#  API = externa en host :8080 (BaseSpringApi local o Docker).
+#  API = externa en host :8080 (salud-geolocalizacion-api local o Docker).
 #  Nginx hace proxy de /api → host.docker.internal:8080
 #
 #  Uso:
@@ -16,8 +16,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: pagina-salud:1.0.0
-    container_name: pagina_salud_app
+    image: salud-geolocalizacion-ui:1.0.0
+    container_name: salud_geolocalizacion_ui
     restart: unless-stopped
     ports:
       - "4200:80"

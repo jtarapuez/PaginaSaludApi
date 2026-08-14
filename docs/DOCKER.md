@@ -1,4 +1,4 @@
-# Docker — PaginaSalud (frontend)
+# Docker — salud-geolocalizacion-ui (frontend)
 
 **Fecha:** 2026-08-04  
 **Estado:** Implementado — modo liviano (solo front en Docker)
@@ -9,8 +9,8 @@
 
 ```
 ┌─────────────────────────┐     proxy /api      ┌──────────────────────────┐
-│  Docker                 │  ───────────────►  │  BaseSpringApi :8080      │
-│  pagina_salud_app       │  host.docker.      │  (Maven o base_spring_app)│
+│  Docker                 │  ───────────────►  │  salud-geolocalizacion-api :8080      │
+│  salud_geolocalizacion_ui       │  host.docker.      │  (Maven o salud_geolocalizacion_api)│
 │  nginx :4200 → :80      │  internal          │  Oracle DBDVP externo     │
 └─────────────────────────┘                     └──────────────────────────┘
          ▲
@@ -29,7 +29,7 @@
 | Archivo | Uso |
 |---------|-----|
 | `Dockerfile` | Build multi-stage (Node 20 + nginx alpine) |
-| `docker-compose.yml` | Servicio `pagina_salud_app` |
+| `docker-compose.yml` | Servicio `salud_geolocalizacion_ui` |
 | `nginx.conf` | SPA + proxy `/api/` → `host.docker.internal:8080` |
 | `.dockerignore` | Excluye `node_modules`, `dist`, etc. |
 | `src/environments/environment.docker.ts` | `apiUrl: '/api'` para el proxy |
@@ -45,14 +45,14 @@ Script npm: `npm run build:docker`.
 
 1. Docker Desktop en ejecución.
 2. **API disponible** en `http://localhost:8080/api/health` (una de):
-   - `cd BaseSpringApi && mvn spring-boot:run -Dspring-boot.run.profiles=oracle`
-   - `cd BaseSpringApi && docker-compose up -d` → `base_spring_app`
+   - `cd salud-geolocalizacion-api && mvn spring-boot:run -Dspring-boot.run.profiles=oracle`
+   - `cd salud-geolocalizacion-api && docker-compose up -d` → `salud_geolocalizacion_api`
 3. Puerto **4200 libre** (no `ng serve` a la vez).
 
 ### Comandos
 
 ```bash
-cd PaginaSalud
+cd salud-geolocalizacion-ui
 docker-compose up -d --build
 docker-compose logs -f front
 ```
@@ -77,7 +77,7 @@ Abrir http://localhost:4200/ → mapa con unidades médicas.
 ### Detener
 
 ```bash
-cd PaginaSalud
+cd salud-geolocalizacion-ui
 docker-compose down
 ```
 
@@ -121,7 +121,7 @@ En servidor QA/PROD ajustar `nginx.conf` (o ingress) con la URL real del API gat
 
 | Síntoma | Causa probable | Acción |
 |---------|----------------|--------|
-| Mapa vacío / error de carga | API caída en :8080 | Levantar BaseSpringApi |
+| Mapa vacío / error de carga | API caída en :8080 | Levantar salud-geolocalizacion-api |
 | `bind: address already in use` (4200) | `ng serve` activo | Detener `npm start` |
 | 502 en `/api/*` | Backend no alcanzable desde contenedor | Verificar `host.docker.internal` (Mac/Win); en Linux el compose ya incluye `extra_hosts` |
 | Cambios no visibles | Imagen cacheada | `docker-compose up -d --build` |

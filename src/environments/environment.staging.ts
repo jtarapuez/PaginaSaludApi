@@ -1,5 +1,7 @@
-// Ambiente de PREPRODUCCIÓN (staging)
-const apiUrl = 'https://api-staging.iess.gob.ec/api';
+// Ambiente de CALIDAD (staging)
+// Simulación LAN 2026-08-06 — servidor QA: Windows 192.168.12.64
+// QA institucional (cuando DNTSI confirme): https://api-staging.iess.gob.ec/api
+const apiUrl = 'http://192.168.12.64:8080/api';
 
 export const environment = {
   production: false,
@@ -25,11 +27,11 @@ export const environment = {
 
   geocoding: {
     nominatimUrl: 'https://nominatim.openstreetmap.org/search',
-    userAgent: 'PaginaSalud-IESS/1.0',
+    userAgent: 'salud-geolocalizacion-ui-IESS/1.0',
     countryCode: 'ec'
   },
   
   // Configuraciones de la aplicación
-  appTitle: 'IESS Salud - Staging',
+  appTitle: 'salud-geolocalizacion-ui - Calidad (simulación LAN)',
   version: '1.0.0-staging'
-}; 
+};

@@ -34,7 +34,7 @@ import { ComoValidarComponent } from './components/como-validar/como-validar.com
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
-  title = 'PaginaSalud';
+  title = 'salud-geolocalizacion-ui';
   private observer!: IntersectionObserver;
 
   ngOnInit() {

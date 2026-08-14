@@ -3,14 +3,22 @@ import { AppComponent } from './app.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
+class IntersectionObserverMock {
+  observe = jasmine.createSpy('observe');
+  disconnect = jasmine.createSpy('disconnect');
+  unobserve = jasmine.createSpy('unobserve');
+}
+
 describe('AppComponent', () => {
   beforeEach(async () => {
+    (window as any).IntersectionObserver = IntersectionObserverMock;
+
     await TestBed.configureTestingModule({
       imports: [
         AppComponent,
         HttpClientTestingModule
       ],
-      schemas: [NO_ERRORS_SCHEMA] // Para ignorar elementos de otros componentes
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
@@ -20,17 +28,33 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'PaginaSalud' title`, () => {
+  it(`should have the 'salud-geolocalizacion-ui' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('PaginaSalud');
+    expect(app.title).toEqual('salud-geolocalizacion-ui');
   });
 
-  it('should render title', () => {
+  it('should initialize scroll observer and observe fade elements', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    const fadeElement = document.createElement('section');
+    fadeElement.className = 'fade-in-scroll';
+    fixture.nativeElement.appendChild(fadeElement);
+
+    app.ngOnInit();
+    app.ngAfterViewInit();
+
+    const observer = (app as any).observer as IntersectionObserverMock;
+    expect(observer.observe).toHaveBeenCalled();
+
+    app.ngOnDestroy();
+    expect(observer.disconnect).toHaveBeenCalled();
+  });
+
+  it('should render router outlet', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    // Cambiamos el test para que busque el router-outlet en lugar de h1
     expect(compiled.querySelector('router-outlet')).toBeTruthy();
   });
 });

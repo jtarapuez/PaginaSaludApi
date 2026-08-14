@@ -1,17 +1,21 @@
 {
-  "name": "pagina-salud",
+  "name": "salud-geolocalizacion-ui",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:staging": "ng serve --configuration=staging",
+    "start:production": "ng serve --configuration=production",
     "build": "ng build",
+    "build:staging": "ng build --configuration=staging",
+    "build:production": "ng build --configuration=production",
     "build:docker": "ng build --configuration=docker",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:coverage": "ng test --no-watch --no-progress --browsers=ChromeHeadless --code-coverage",
     "sonar": "sonar-scanner",
     "run-sonar": "npm run test:coverage && npm run sonar",
-    "serve:ssr:PaginaSalud": "node dist/pagina-salud/server/server.mjs"
+    "serve:ssr:salud-geolocalizacion-ui": "node dist/salud-geolocalizacion-ui/server/server.mjs"
   },
   "private": true,
   "dependencies": {

@@ -1,4 +1,4 @@
-# PaginaSaludApi (PaginaSalud IESS)
+# salud-geolocalizacion-uiApi (salud-geolocalizacion-ui IESS)
 
 Aplicación Angular para la página de salud del IESS, con mapa de unidades médicas y geolocalización (Leaflet).
 
@@ -43,17 +43,17 @@ This will compile your project and store the build artifacts in the `dist/` dire
 
 ## Docker (nginx)
 
-Front en contenedor; la API sigue en **BaseSpringApi** (`:8080` en el host). Nginx sirve el build y hace proxy de `/api` al backend.
+Front en contenedor; la API sigue en **salud-geolocalizacion-api** (`:8080` en el host). Nginx sirve el build y hace proxy de `/api` al backend.
 
 ```bash
-# Requiere API en http://localhost:8080/api (Maven o docker-compose en BaseSpringApi)
-cd PaginaSalud
+# Requiere API en http://localhost:8080/api (Maven o docker-compose en salud-geolocalizacion-api)
+cd salud-geolocalizacion-ui
 docker-compose up -d --build
 ```
 
 - **URL:** http://localhost:4200/
-- **Contenedor:** `pagina_salud_app`
-- **Imagen:** `pagina-salud:1.0.0`
+- **Contenedor:** `salud_geolocalizacion_ui`
+- **Imagen:** `salud-geolocalizacion-ui:1.0.0`
 
 > No usar `npm start` y Docker a la vez en el puerto **4200**.
 
@@ -80,7 +80,7 @@ export SONAR_TOKEN=tu_token   # obtener en http://192.168.111.89:9000 → My Acc
 npm run run-sonar             # tests + cobertura + análisis
 ```
 
-Dashboard: http://192.168.111.89:9000/dashboard?id=pagina-salud
+Dashboard: http://192.168.111.89:9000/dashboard?id=salud-geolocalizacion-ui
 
 ## Additional Resources
 

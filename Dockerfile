@@ -1,5 +1,5 @@
 # ============================================================
-#  PaginaSalud - Dockerfile
+#  salud-geolocalizacion-ui - Dockerfile
 #  Multi-stage: Node build + nginx static
 # ============================================================
 
@@ -20,11 +20,11 @@ RUN node node_modules/@angular/cli/bin/ng.js build --configuration=docker
 
 FROM nginx:1.27-alpine AS runtime
 
-LABEL application="PaginaSalud"
+LABEL application="salud-geolocalizacion-ui"
 LABEL version="1.0.0"
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/dist/pagina-salud /usr/share/nginx/html
+COPY --from=builder /app/dist/salud-geolocalizacion-ui /usr/share/nginx/html
 
 EXPOSE 80
 

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "PaginaSalud": {
+    "salud-geolocalizacion-ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/pagina-salud",
+            "outputPath": "dist/salud-geolocalizacion-ui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -36,6 +36,9 @@
             ],
             "scripts": [
               "node_modules/leaflet/dist/leaflet.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "leaflet"
             ]
           },
           "configurations": {
@@ -98,8 +101,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "16kb"
+                  "maximumWarning": "12kb",
+                  "maximumError": "20kb"
                 }
               ],
               "outputHashing": "all",
@@ -124,16 +127,16 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "PaginaSalud:build:production"
+              "buildTarget": "salud-geolocalizacion-ui:build:production"
             },
             "staging": {
-              "buildTarget": "PaginaSalud:build:staging"
+              "buildTarget": "salud-geolocalizacion-ui:build:staging"
             },
             "development": {
-              "buildTarget": "PaginaSalud:build:development"
+              "buildTarget": "salud-geolocalizacion-ui:build:development"
             },
             "docker": {
-              "buildTarget": "PaginaSalud:build:docker"
+              "buildTarget": "salud-geolocalizacion-ui:build:docker"
             }
           },
           "defaultConfiguration": "development"
@@ -141,7 +144,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "PaginaSalud:build"
+            "buildTarget": "salud-geolocalizacion-ui:build"
           }
         },
         "test": {
