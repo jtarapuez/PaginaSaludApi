@@ -1,3 +1,7 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -18,6 +22,12 @@ interface BootstrapCarouselEvent extends Event {
   to: number;
 }
 
+/**
+ * Carrusel de videos tutoriales de trámites de Salud.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 @Component({
   selector: 'app-tutoriales-video',
   imports: [],
@@ -76,10 +86,16 @@ export class TutorialesVideoComponent implements OnInit, AfterViewInit, OnDestro
   selectedVideoTitle = '';
   safeVideoEmbedUrl: SafeResourceUrl | null = null;
 
+  /**
+   * Reconstruye las diapositivas del carrusel.
+   */
   ngOnInit(): void {
     this.rebuildSlides();
   }
 
+  /**
+   * Inicializa el modal y los eventos del carrusel en el navegador.
+   */
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) {
       return;
@@ -90,6 +106,9 @@ export class TutorialesVideoComponent implements OnInit, AfterViewInit, OnDestro
     this.bindCarouselEvents();
   }
 
+  /**
+   * Libera temporizadores y listeners del modal/carrusel.
+   */
   ngOnDestroy(): void {
     if (!isPlatformBrowser(this.platformId)) {
       return;
@@ -112,6 +131,9 @@ export class TutorialesVideoComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   @HostListener('window:resize')
+  /**
+   * Recalcula slides al cambiar el tamaño de la ventana.
+   */
   onResize(): void {
     if (!isPlatformBrowser(this.platformId)) {
       return;
@@ -129,6 +151,9 @@ export class TutorialesVideoComponent implements OnInit, AfterViewInit, OnDestro
     }, 300);
   }
 
+  /**
+   * Abre el modal de reproducción del video seleccionado.
+   */
   openVideo(video: TutorialVideo): void {
     if (!isPlatformBrowser(this.platformId)) {
       return;

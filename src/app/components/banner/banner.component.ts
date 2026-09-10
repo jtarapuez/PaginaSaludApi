@@ -1,5 +1,15 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
 import { Component } from '@angular/core';
 
+/**
+ * Banner principal de la landing de Salud.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 @Component({
   selector: 'app-banner',
   imports: [],

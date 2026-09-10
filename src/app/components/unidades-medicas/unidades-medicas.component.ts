@@ -1,3 +1,7 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
 import { Component } from '@angular/core';
 
 interface NivelUnidadMedica {
@@ -5,6 +9,12 @@ interface NivelUnidadMedica {
   cantidad: number;
 }
 
+/**
+ * Resumen de unidades médicas IESS por nivel de atención.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 @Component({
   selector: 'app-unidades-medicas',
   imports: [],

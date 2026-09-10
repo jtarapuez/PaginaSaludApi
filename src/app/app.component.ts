@@ -1,3 +1,7 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -13,6 +17,12 @@ import { PreguntasFrecuentesComponent } from './components/preguntas-frecuentes/
 import { VolverArribaComponent } from './components/volver-arriba/volver-arriba.component';
 import { ComoValidarComponent } from './components/como-validar/como-validar.component';
 
+/**
+ * Componente raíz de la landing de Salud IESS.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 @Component({
   selector: 'app-root',
   imports: [
@@ -37,16 +47,25 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   title = 'salud-geolocalizacion-ui';
   private observer!: IntersectionObserver;
 
+  /**
+   * Inicializa las animaciones de scroll.
+   */
   ngOnInit() {
     this.initScrollAnimations();
   }
 
+  /**
+   * Observa elementos visibles tras el render de componentes hijos.
+   */
   ngAfterViewInit() {
     this.observeElements();
     // Re-escanea tras el render completo de componentes hijos
     setTimeout(() => this.observeElements(), 0);
   }
 
+  /**
+   * Libera el IntersectionObserver.
+   */
   ngOnDestroy() {
     if (this.observer) {
       this.observer.disconnect();

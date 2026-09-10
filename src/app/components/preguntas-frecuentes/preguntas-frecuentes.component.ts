@@ -1,3 +1,7 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
 import { Component } from '@angular/core';
 
 interface PreguntaFrecuente {
@@ -7,6 +11,12 @@ interface PreguntaFrecuente {
   pasos?: string[];
 }
 
+/**
+ * Acordeón de preguntas frecuentes de Salud IESS.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 @Component({
   selector: 'app-preguntas-frecuentes',
   imports: [],
@@ -70,10 +80,16 @@ export class PreguntasFrecuentesComponent {
 
   private readonly abiertos = new Set<number>([0]);
 
+  /**
+   * Indica si la pregunta del índice dado está expandida.
+   */
   estaAbierta(indice: number): boolean {
     return this.abiertos.has(indice);
   }
 
+  /**
+   * Expande o contrae la pregunta del índice dado.
+   */
   alternar(indice: number): void {
     if (this.abiertos.has(indice)) {
       this.abiertos.delete(indice);

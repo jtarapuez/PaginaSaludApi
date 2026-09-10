@@ -1,3 +1,7 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
 import { Component } from '@angular/core';
 
 const PORTAL_URL = 'https://www.iess.gob.ec/afiliado-web/pages/principal.jsf';
@@ -7,6 +11,12 @@ interface PasoExtension {
   fragmentos: { texto: string; enlace?: string }[];
 }
 
+/**
+ * Pasos para solicitar extensión de cobertura a dependientes.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 @Component({
   selector: 'app-extension-cobertura',
   imports: [],

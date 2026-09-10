@@ -1,3 +1,7 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { NavbarComponent } from './navbar.component';
 
@@ -11,12 +15,13 @@ describe('NavbarComponent', () => {
     container.innerHTML = `
       <button class="navbar-toggler" aria-expanded="true"></button>
       <div id="navbarNav" class="collapse show">
-        <a class="nav-link" href="#inicio">Inicio</a>
-        <a class="nav-link" data-bs-toggle="dropdown" href="#">Menu</a>
-        <a class="dropdown-item" href="#faq">FAQ</a>
+        <a class="nav-link" href="javascript:void(0)">Inicio</a>
+        <a class="nav-link" data-bs-toggle="dropdown" href="javascript:void(0)">Menu</a>
+        <a class="dropdown-item" href="javascript:void(0)">FAQ</a>
       </div>
     `;
     document.body.appendChild(container);
+    container.addEventListener('click', (event) => event.preventDefault(), true);
 
     await TestBed.configureTestingModule({
       imports: [NavbarComponent]

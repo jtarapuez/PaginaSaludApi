@@ -1,5 +1,15 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
 import { Component } from '@angular/core';
 
+/**
+ * Sección de cobertura del Seguro de Salud.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 @Component({
   selector: 'app-cobertura-seguro',
   imports: [],

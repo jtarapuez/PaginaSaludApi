@@ -1,3 +1,14 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
+
+/**
+ * Variables de entorno de producción.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 // Ambiente de PRODUCCIÓN
 const apiUrl = 'https://api.iess.gob.ec/api';
 

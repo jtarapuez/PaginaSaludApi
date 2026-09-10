@@ -1,3 +1,7 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PreguntasFrecuentesComponent } from './preguntas-frecuentes.component';
 

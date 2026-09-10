@@ -28,6 +28,8 @@ module.exports = function (config) {
     },
     reporters: ['progress', 'kjhtml', 'coverage'],
     browsers: ['ChromeHeadless'],
+    browserDisconnectTimeout: 20000,
+    browserNoActivityTimeout: 60000,
     restartOnFileChange: true,
     singleRun: false,
   });

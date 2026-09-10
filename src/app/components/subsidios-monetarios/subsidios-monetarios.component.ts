@@ -1,5 +1,15 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
 import { Component } from '@angular/core';
 
+/**
+ * Información de subsidios monetarios por enfermedad y maternidad.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 @Component({
   selector: 'app-subsidios-monetarios',
   imports: [],
@@ -22,6 +32,9 @@ export class SubsidiosMonetariosComponent {
 
   accordionAbierto = false;
 
+  /**
+   * Abre o cierra el acordeón de tipos de subsidio.
+   */
   toggleAccordion(): void {
     this.accordionAbierto = !this.accordionAbierto;
   }

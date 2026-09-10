@@ -1,3 +1,14 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
+
+/**
+ * Variables de entorno para Docker (nginx hace proxy de /api).
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 // Ambiente DOCKER (nginx sirve el front y hace proxy de /api al backend)
 const apiUrl = '/api';
 

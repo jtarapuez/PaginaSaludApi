@@ -1,5 +1,15 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
 import { Component, OnInit } from '@angular/core';
 
+/**
+ * Barra de navegación principal de la landing.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 @Component({
   selector: 'app-navbar',
   imports: [],
@@ -8,6 +18,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  /**
+   * Configura el cierre del menú en vista móvil.
+   */
   ngOnInit() {
     // Funcionalidad para cerrar el menú al hacer clic en enlaces en móvil
     this.initNavbarToggle();

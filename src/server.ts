@@ -1,3 +1,7 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
 import {
   AngularNodeAppEngine,
   createNodeRequestHandler,
@@ -8,6 +12,12 @@ import express from 'express';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+/**
+ * Servidor Express SSR de Angular.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
 

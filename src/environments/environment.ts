@@ -1,3 +1,14 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
+
+/**
+ * Variables de entorno de desarrollo (ng serve + proxy /api).
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 // Ambiente de DESARROLLO (local y red LAN vía ng serve --host 0.0.0.0 + proxy)
 const apiUrl = '/api';
 

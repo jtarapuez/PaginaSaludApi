@@ -1,3 +1,14 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
+
+/**
+ * Variables de entorno de calidad (staging).
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 // Ambiente de CALIDAD (staging)
 // Simulación LAN 2026-08-06 — servidor QA: Windows 192.168.12.64
 // QA institucional (cuando DNTSI confirme): https://api-staging.iess.gob.ec/api

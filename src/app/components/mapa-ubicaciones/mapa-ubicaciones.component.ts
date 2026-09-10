@@ -1,3 +1,7 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
 import { Component, OnInit, AfterViewInit, OnDestroy, NgZone, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common'; 
@@ -10,6 +14,12 @@ import * as L from 'leaflet';
 
 type OrigenUbicacion = 'gps' | 'manual' | 'geocoded';
 
+/**
+ * Mapa Leaflet de unidades médicas con filtros, geolocalización y rutas.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 @Component({
   selector: 'app-mapa-ubicaciones',
   standalone: true,
@@ -134,6 +144,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     }
   }
 
+  /**
+   * Carga unidades médicas y configura detección de dispositivo.
+   */
   ngOnInit(): void {
     this.configurarDeteccionDispositivo();
 
@@ -168,6 +181,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     }, 500);
   }
   
+  /**
+   * Recalcula el tamaño del mapa cuando el contenedor es visible.
+   */
   ngAfterViewInit(): void {
     const content = document.querySelector('.mapa-content-reveal');
     if (!content) {
@@ -185,6 +201,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     this.mapRevealObserver.observe(content);
   }
 
+  /**
+   * Libera mapa, observadores y temporizadores.
+   */
   ngOnDestroy(): void {
     this.mapRevealObserver?.disconnect();
     if (this.busquedaTimeout) {
@@ -201,7 +220,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     }
   }
   
-  // Método para inicializar el mapa
+  /**
+   * Crea la instancia Leaflet y solicita geolocalización.
+   */
   inicializarMapa(): void {
     console.log('Iniciando inicialización del mapa...');
     
@@ -352,6 +373,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     );
   }
 
+  /**
+   * Solicita de nuevo el permiso de geolocalización.
+   */
   reintentarGeolocalizacion(): void {
     this.cerrarModalUbicacionPc();
     void this.solicitarUbicacionUsuario();
@@ -417,6 +441,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     this.mostrarModalUbicacionPc = true;
   }
 
+  /**
+   * Activa el modo para marcar la ubicación en el mapa (PC).
+   */
   activarModoMarcarUbicacion(preservarMensaje = false): void {
     this.mostrarModalUbicacionPc = false;
     if (!preservarMensaje) {
@@ -445,6 +472,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     });
   }
 
+  /**
+   * Cancela el modo de marcado de ubicación.
+   */
   cancelarModoMarcarUbicacion(): void {
     this.desactivarModoMarcarUbicacion();
   }
@@ -461,6 +491,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     }
   }
 
+  /**
+   * Cierra el modal de ubicación en PC.
+   */
   cerrarModalUbicacionPc(): void {
     this.mostrarModalUbicacionPc = false;
     this.obteniendoUbicacion = false;
@@ -512,6 +545,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     }, 100);
   }
 
+  /**
+   * Dibuja o actualiza el marcador de la ubicación del usuario.
+   */
   mostrarUbicacionUsuarioEnMapa(abrirPopup = true): void {
     if (!this.map || !this.userLocation) return;
 
@@ -579,6 +615,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     });
   }
 
+  /**
+   * Calcula la distancia en kilómetros entre dos coordenadas.
+   */
   calcularDistancia(lat1: number, lon1: number, lat2: number, lon2: number): number {
     const R = 6371; // Radio de la Tierra en kilómetros
     const dLat = this.deg2rad(lat2 - lat1);
@@ -592,15 +631,24 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     return d;
   }
 
+  /**
+   * Convierte grados a radianes.
+   */
   deg2rad(deg: number): number {
     return deg * (Math.PI/180);
   }
 
+  /**
+   * Recalcula distancias en los popups de los marcadores.
+   */
   actualizarDistanciasEnMarcadores(): void {
     // Delegado a actualizarMarcadoresConDistancia()
     this.actualizarMarcadoresConDistancia();
   }
 
+  /**
+   * Muestra u oculta el mapa.
+   */
   toggleMapa(): void {
     this.mostrarMapa = !this.mostrarMapa;
     
@@ -615,6 +663,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     }
   }
 
+  /**
+   * Pinta los marcadores de las unidades filtradas o del listado completo.
+   */
   mostrarMarcadoresEnMapa(): void {
     if (!this.map) return;
     
@@ -643,22 +694,37 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     });
   }
 
+  /**
+   * Total de unidades en el listado filtrado.
+   */
   getTotalUnidades(): number {
     return this.provinciasFiltradas.reduce((total, provincia) => total + provincia.unidades.length, 0);
   }
 
+  /**
+   * Expande o contrae el acordeón de una provincia.
+   */
   toggleProvincia(provincia: string): void {
     this.provinciasExpandidas[provincia] = !this.provinciasExpandidas[provincia];
   }
 
+  /**
+   * Aplica el filtro por provincia.
+   */
   filtrarPorProvincia(): void {
     this.aplicarFiltros();
   }
 
+  /**
+   * Aplica el filtro por nivel de atención.
+   */
   filtrarPorNivel(): void {
     this.aplicarFiltros();
   }
 
+  /**
+   * Busca unidades por nombre con debounce.
+   */
   buscarPorNombre(): void {
     if (this.busquedaTimeout) {
       clearTimeout(this.busquedaTimeout);
@@ -675,6 +741,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     }, 350);
   }
 
+  /**
+   * Restablece filtros y recarga el listado completo.
+   */
   limpiarFiltros(): void {
     this.provinciaSeleccionada = '';
     this.nivelSeleccionado = null;
@@ -739,6 +808,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     });
   }
 
+  /**
+   * Centra el mapa en una unidad y opcionalmente abre su popup.
+   */
   centrarEnUnidad(
     latitud: number,
     longitud: number,
@@ -766,6 +838,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     }
   }
 
+  /**
+   * Inicia la ruta hacia una unidad (mapa móvil o Google Maps en PC).
+   */
   mostrarRuta(latitudDestino: number, longitudDestino: number, unidad?: UnidadMedica): void {
     if (unidad) {
       this.unidadDestinoActiva = unidad;
@@ -804,10 +879,16 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     void this.dibujarRutaEnMapa(latitudDestino, longitudDestino, unidad);
   }
 
+  /**
+   * Oculta la información de ruta en el mapa.
+   */
   cerrarInfoRuta(): void {
     this.limpiarRuta();
   }
 
+  /**
+   * Abre Google Maps para la unidad destino activa.
+   */
   abrirUbicacionEnGoogleMaps(): void {
     if (!this.unidadDestinoActiva) {
       this.mensajeUbicacionInline =
@@ -822,6 +903,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     );
   }
 
+  /**
+   * Prepara la apertura de Google Maps (modal en PC).
+   */
   mostrarInstruccionesGoogleMaps(latitudDestino: number, longitudDestino: number): void {
     const usarRuta = this.esDispositivoMovil;
     this.destinoGoogleMapsPendiente = { lat: latitudDestino, lng: longitudDestino, usarRuta };
@@ -834,6 +918,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     this.mostrarModalGoogleMaps = true;
   }
 
+  /**
+   * Confirma y abre Google Maps en una pestaña nueva.
+   */
   confirmarAbrirGoogleMaps(): void {
     if (!this.destinoGoogleMapsPendiente) {
       return;
@@ -848,6 +935,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     window.open(googleMapsUrl, '_blank');
   }
 
+  /**
+   * Cierra el modal de Google Maps.
+   */
   cerrarModalGoogleMaps(): void {
     this.mostrarModalGoogleMaps = false;
     this.destinoGoogleMapsPendiente = null;
@@ -1022,6 +1112,9 @@ export class MapaUbicacionesComponent implements OnInit, AfterViewInit, OnDestro
     return 'Ruta sugerida';
   }
 
+  /**
+   * Abre el marcador telefónico de la unidad.
+   */
   llamarUnidad(telefono: string): void {
     window.location.href = `tel:${telefono}`;
   }

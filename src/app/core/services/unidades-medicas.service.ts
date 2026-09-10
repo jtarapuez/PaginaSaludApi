@@ -1,3 +1,7 @@
+/**
+ * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
+ * Todos los derechos reservados.
+ */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, shareReplay } from 'rxjs';
@@ -5,6 +9,12 @@ import { ProvinciaUnidades } from '../models/unidades-medicas.model';
 import { UnidadesMedicasFiltros } from '../models/unidades-medicas-filtros.model';
 import { environment } from '../../../environments/environment';
 
+/**
+ * Servicio HTTP para consultar unidades médicas agrupadas por provincia.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +24,9 @@ export class UnidadesMedicasService {
 
   constructor(private readonly http: HttpClient) { }
 
+  /**
+   * Obtiene el listado de unidades; cachea la consulta cuando no hay filtros.
+   */
   getUnidadesMedicas(filtros?: UnidadesMedicasFiltros): Observable<ProvinciaUnidades[]> {
     const params = this.buildParams(filtros);
     const tieneFiltros = params.keys().length > 0;
@@ -35,6 +48,9 @@ export class UnidadesMedicasService {
     return request$;
   }
 
+  /**
+   * Invalida la caché en memoria del listado sin filtros.
+   */
   clearCache(): void {
     this.unidadesMedicasCache$ = null;
   }
