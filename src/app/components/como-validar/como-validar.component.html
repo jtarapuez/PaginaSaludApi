@@ -2,11 +2,8 @@
   <div class="custom-container-interno como-validar-inner fade-in-up">
     <div class="como-validar-grid">
       @for (tarjeta of tarjetas; track tarjeta.titulo) {
-        <a
+        <div
           class="como-validar-card como-validar-card--{{ tarjeta.variante }} fade-in-scale"
-          [href]="tarjeta.enlace"
-          target="_blank"
-          rel="noopener noreferrer"
         >
           <img
             [src]="tarjeta.imagen"
@@ -18,7 +15,7 @@
             aria-hidden="true"
           >
           <span class="como-validar-card-label">{{ tarjeta.titulo }}</span>
-        </a>
+        </div>
       }
     </div>
   </div>
